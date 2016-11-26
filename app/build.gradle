@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+//Daggar
+apply plugin: 'com.neenbedankt.android-apt'
+//lamda
+apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'me.tatarka.retrolambda'
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+    defaultConfig {
+        applicationId "com.foodora"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+repositories {
+    repositories {
+        mavenCentral()
+    }
+    //unitTest -robolectric - needed for robolectric
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven {
+        name "Fyber's maven repo"
+        url "https://fyber.bintray.com/maven"
+    }
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    testCompile 'junit:junit:4.12'
+    //Dagger
+    compile 'com.google.dagger:dagger:2.0.2'
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+    apt 'com.google.dagger:dagger-compiler:2.0.2'
+    testCompile 'com.google.dagger:dagger-compiler:2.0.2'
+    //Butter knife
+    compile "com.jakewharton:butterknife:7.0.1"
+    //event bus
+    compile 'com.squareup:otto:1.3.8'
+    //Logging
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.0'
+    //unitTest -robolectric
+    testCompile "org.robolectric:robolectric:3.1.1"
+    // retrofit
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.3.0'
+    //recyclerview
+    compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+}
