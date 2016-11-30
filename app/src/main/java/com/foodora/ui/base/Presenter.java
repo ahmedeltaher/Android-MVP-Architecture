@@ -34,6 +34,7 @@ public abstract class Presenter<T extends Presenter.View> {
 
     public void finalizeView() {
         isViewAlive.set(false);
+        view = null;
     }
 
     public void onSettingsClick() {

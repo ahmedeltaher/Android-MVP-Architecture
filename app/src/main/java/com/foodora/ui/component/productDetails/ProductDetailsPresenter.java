@@ -24,6 +24,8 @@ public class ProductDetailsPresenter extends Presenter<ProductDetailsView> {
     public void initialize(Bundle extras) {
         super.initialize(extras);
         imageURL = (String) extras.get(IMAGE_URL_KEY);
-        getView().initializeProductFullImage(imageURL);
+        if (isViewAlive.get()) {
+            getView().initializeProductFullImage(imageURL);
+        }
     }
 }

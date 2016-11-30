@@ -52,7 +52,9 @@ public class HomePresenter extends Presenter<HomeView> {
         @Override
         public void onItemSelected(int position) {
             //TODO goto ImageActivity
-            getView().navigateToProductDetails(products.get(position).getImage());
+            if (isViewAlive.get()) {
+                getView().navigateToProductDetails(products.get(position).getImage());
+            }
         }
     };
 
@@ -60,8 +62,10 @@ public class HomePresenter extends Presenter<HomeView> {
         @Override
         public void onSuccess(Products allProducts) {
             products = allProducts.getProducts();
-            getView().initializeProductsList(getActiveProducts());
-            getView().setLoaderVisiblity(false);
+            if (isViewAlive.get()) {
+                getView().initializeProductsList(getActiveProducts());
+                getView().setLoaderVisiblity(false);
+            }
         }
 
         @Override

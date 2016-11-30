@@ -19,6 +19,8 @@ public class SplashPresenter extends Presenter<SplashView> {
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
-        getView().NavigateToMainScreen();
+        if (isViewAlive.get()) {
+            getView().NavigateToMainScreen();
+        }
     }
 }
