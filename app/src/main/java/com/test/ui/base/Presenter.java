@@ -18,7 +18,7 @@ public abstract class Presenter<T extends Presenter.View> {
     protected AtomicBoolean isViewAlive = new AtomicBoolean();
 
     public T getView() {
-        return view == null ? null : view.get();
+        return view.get();
     }
 
     public void setView(T view) {
