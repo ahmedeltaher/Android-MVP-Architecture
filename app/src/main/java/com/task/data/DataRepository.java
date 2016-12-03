@@ -20,8 +20,8 @@ public class DataRepository {
         this.localRepository = localRepository;
     }
 
-    public ResponseWrapper requestFoodoraProducts() {
-        ResponseWrapper response = apiRepository.getFoodoraProducts();
+    public ResponseWrapper requestScooters() {
+        ResponseWrapper response = apiRepository.getScooters();
         return response;
     }
 }

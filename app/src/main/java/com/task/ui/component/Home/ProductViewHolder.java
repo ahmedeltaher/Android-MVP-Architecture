@@ -2,19 +2,20 @@ package com.task.ui.component.Home;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.task.R;
-import com.task.data.remote.dto.Product;
+import com.task.data.remote.dto.Scooter;
 import com.task.ui.base.listeners.RecyclerItemListener;
-import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static android.view.View.GONE;
+import static android.graphics.Color.GREEN;
+import static android.graphics.Color.RED;
+import static android.graphics.Color.YELLOW;
+import static java.lang.String.valueOf;
 
 /**
  * Created by AhmedEltaher on 25/11/16.
@@ -24,18 +25,16 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
 
     private RecyclerItemListener onItemClickListener;
 
-    @Bind(R.id.tv_product_name)
-    TextView tvProductName;
-    @Bind(R.id.tv_product_original_price)
-    TextView tvOriginalPrice;
-    @Bind(R.id.tv_product_current_price)
-    TextView tvCurrentPrice;
-    @Bind(R.id.tv_product_brand)
-    TextView tvBrandName;
-    @Bind(R.id.iv_product_image)
-    ImageView ivProductImage;
-    @Bind(R.id.rl_product_item)
-    RelativeLayout productItemLayout;
+    @Bind(R.id.tv_motorcycle_vin)
+    TextView tvVIN;
+    @Bind(R.id.tv_motorcycle_name)
+    TextView tvName;
+    @Bind(R.id.tv_motorcycle_license_plate)
+    TextView tvLicensePlate;
+    @Bind(R.id.tv_motorcycle_energy_level)
+    TextView tvEnergyLevel;
+    @Bind(R.id.rl_scooter_item)
+    RelativeLayout scooterItemLayout;
 
 
     public ProductViewHolder(View itemView, RecyclerItemListener onItemClickListener) {
@@ -44,20 +43,19 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(int position, Product product, RecyclerItemListener recyclerItemListener) {
-        tvProductName.setText(product.getName());
-        double originalPrice = product.getPrice().getOriginal();
-        double currentPrice = product.getPrice().getCurrent();
-        tvOriginalPrice.setText(product.getPrice().getOriginal() + product.getPrice().getCurrency());
-        if (originalPrice == currentPrice) {
-            tvCurrentPrice.setVisibility(GONE);
+    public void bind(int position, Scooter scooter, RecyclerItemListener recyclerItemListener) {
+        tvVIN.setText(scooter.getVin());
+        tvName.setText(scooter.getModel());
+        tvLicensePlate.setText(scooter.getLicensePlate());
+        tvEnergyLevel.setText(valueOf(scooter.getEnergyLevel()));
+        if (scooter.getEnergyLevel() > 50) {
+            scooterItemLayout.setBackgroundColor(GREEN);
+        } else if (scooter.getEnergyLevel() > 30) {
+            scooterItemLayout.setBackgroundColor(YELLOW);
         } else {
-            tvCurrentPrice.setText(product.getPrice().getCurrent() + product.getPrice().getCurrency());
+            scooterItemLayout.setBackgroundColor(RED);
         }
-        tvBrandName.setText(product.getBrand());
-        Picasso.with(ivProductImage.getContext()).load(product.getImage()).placeholder(R.drawable
-            .shirt_icon).fit().into(ivProductImage);
-        productItemLayout.setOnClickListener(v -> recyclerItemListener.onItemSelected(position));
+        scooterItemLayout.setOnClickListener(v -> recyclerItemListener.onItemSelected(position));
     }
 }
 

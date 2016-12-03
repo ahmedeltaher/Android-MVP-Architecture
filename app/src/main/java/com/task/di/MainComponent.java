@@ -2,7 +2,7 @@ package com.task.di;
 
 
 import com.task.ui.component.Home.HomeActivity;
-import com.task.ui.component.productDetails.ProductDetailsActivity;
+import com.task.ui.component.ScooterLocation.ProductDetailsActivity;
 import com.task.ui.component.splash.SplashActivity;
 
 import javax.inject.Singleton;

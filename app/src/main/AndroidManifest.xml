@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.task.ui.component.Home.HomeActivity"/>
-        <activity android:name="com.task.ui.component.productDetails.ProductDetailsActivity"/>
+        <activity android:name="com.task.ui.component.ScooterLocation.ProductDetailsActivity"/>
     </application>
 
 </manifest>

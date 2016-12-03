@@ -5,4 +5,5 @@
     <dimen name="default_margin">7dp</dimen>
     <dimen name="item_hight">150dp</dimen>
     <dimen name="top_margin">32dp</dimen>
+    <dimen name="title_font_size">25dp</dimen>
 </resources>

@@ -3,8 +3,8 @@ package com.task.data.remote;
 import android.support.annotation.NonNull;
 
 import com.task.App;
-import com.task.data.remote.dto.Products;
-import com.task.data.remote.service.ProductService;
+import com.task.data.remote.dto.ScootersLocationModel;
+import com.task.data.remote.service.ScootersLocatorService;
 import com.task.utils.Constants;
 
 import java.io.IOException;
@@ -32,9 +32,9 @@ public class ApiRepository {
         this.serviceGenerator = serviceGenerator;
     }
 
-    public ResponseWrapper getFoodoraProducts() {
-        ProductService productService = serviceGenerator.createService(ProductService.class, Constants.BASE_URL);
-        Call<Products> call = productService.fetchProducts();
+    public ResponseWrapper getScooters() {
+        ScootersLocatorService scootersLocatorService = serviceGenerator.createService(ScootersLocatorService.class, Constants.BASE_URL);
+        Call<ScootersLocationModel> call = scootersLocatorService.fetchScooters();
         return processCall(call);
     }
 

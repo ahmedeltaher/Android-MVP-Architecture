@@ -7,9 +7,9 @@ import android.widget.ProgressBar;
 
 import com.task.App;
 import com.task.R;
-import com.task.data.remote.dto.Product;
+import com.task.data.remote.dto.Scooter;
 import com.task.ui.base.BaseActivity;
-import com.task.ui.component.productDetails.ProductDetailsActivity;
+import com.task.ui.component.ScooterLocation.ProductDetailsActivity;
 
 import java.util.List;
 
@@ -61,12 +61,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
     }
 
     @Override
-    public void initializeProductsList(List<Product> Products) {
-        ProductsAdapter productsAdapter = new ProductsAdapter(presenter.getRecyclerItemListener(), presenter.getActiveProducts());
+    public void initializeScootersList(List<Scooter> scooters) {
+        ScootersAdapter scootersAdapter = new ScootersAdapter(presenter.getRecyclerItemListener(), scooters);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvProducts.setLayoutManager(layoutManager);
         rvProducts.setHasFixedSize(true);
-        rvProducts.setAdapter(productsAdapter);
+        rvProducts.setAdapter(scootersAdapter);
     }
 
     @Override

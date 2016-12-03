@@ -2,15 +2,11 @@ package com.task.ui.component.Home;
 
 import android.os.Bundle;
 
-import com.task.data.remote.dto.Product;
-import com.task.data.remote.dto.Products;
+import com.task.data.remote.dto.ScootersLocationModel;
 import com.task.ui.base.Presenter;
 import com.task.ui.base.listeners.RecyclerItemListener;
-import com.task.usecase.FoodoraProductsUseCase;
-import com.task.usecase.FoodoraProductsUseCase.Callback;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.task.usecase.ScootersUseCase;
+import com.task.usecase.ScootersUseCase.Callback;
 
 import javax.inject.Inject;
 
@@ -20,48 +16,44 @@ import javax.inject.Inject;
 
 public class HomePresenter extends Presenter<HomeView> {
 
-    private final FoodoraProductsUseCase foodoraProductsUseCase;
-    private List<Product> products;
+    private final ScootersUseCase scootersUseCase;
+    private ScootersLocationModel scootersLocationModel;
 
     @Inject
-    public HomePresenter(FoodoraProductsUseCase foodoraProductsUseCase) {
-        this.foodoraProductsUseCase = foodoraProductsUseCase;
+    public HomePresenter(ScootersUseCase scootersUseCase) {
+        this.scootersUseCase = scootersUseCase;
     }
 
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
-        foodoraProductsUseCase.getProducts(callback);
+        scootersUseCase.getProducts(callback);
     }
 
     public RecyclerItemListener getRecyclerItemListener() {
         return recyclerItemListener;
     }
 
-    public List<Product> getActiveProducts() {
-        List<Product> activeProducts = new ArrayList<>();
-        for (Product product : products) {
-            if (product.isActive()) {
-                activeProducts.add(product);
-            }
-        }
-        return activeProducts;
+
+    public ScootersLocationModel getScootersLocationModel() {
+        return scootersLocationModel;
     }
 
-    private final RecyclerItemListener recyclerItemListener = new RecyclerItemListener() {
-        @Override
-        public void onItemSelected(int position) {
-            //TODO goto ImageActivity
-                getView().navigateToProductDetails(products.get(position).getImage());
+
+    private final RecyclerItemListener recyclerItemListener = position -> {
+        //TODO goto Scootor Location
+        if (isViewAlive.get()) {
         }
     };
 
     private final Callback callback = new Callback() {
         @Override
-        public void onSuccess(Products allProducts) {
-            products = allProducts.getProducts();
-                getView().initializeProductsList(getActiveProducts());
+        public void onSuccess(ScootersLocationModel scootersLocationModel) {
+            if (isViewAlive.get()) {
+                HomePresenter.this.scootersLocationModel = scootersLocationModel;
+                getView().initializeScootersList(scootersLocationModel.getData().getScooters());
                 getView().setLoaderVisiblity(false);
+            }
         }
 
         @Override

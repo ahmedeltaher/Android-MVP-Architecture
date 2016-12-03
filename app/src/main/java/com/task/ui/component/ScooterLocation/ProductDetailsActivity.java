@@ -1,4 +1,4 @@
-package com.task.ui.component.productDetails;
+package com.task.ui.component.ScooterLocation;
 
 import android.widget.ImageView;
 
@@ -18,7 +18,7 @@ import butterknife.Bind;
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsView {
     @Inject
     ProductDetailsPresenter presenter;
-    @Bind(R.id.iv_product_image)
+    @Bind(R.id.iv_motorcycle_image)
     ImageView ivProductImage;
 
     @Override

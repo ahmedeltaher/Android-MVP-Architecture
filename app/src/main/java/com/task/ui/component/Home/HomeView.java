@@ -1,6 +1,6 @@
 package com.task.ui.component.Home;
 
-import com.task.data.remote.dto.Product;
+import com.task.data.remote.dto.Scooter;
 import com.task.ui.base.Presenter;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface HomeView extends Presenter.View {
-    void initializeProductsList(List<Product> Products);
+    void initializeScootersList(List<Scooter> scooters);
 
     void setLoaderVisiblity(boolean isVisible);
 

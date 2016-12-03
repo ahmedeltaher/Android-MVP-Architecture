@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.task.R;
-import com.task.data.remote.dto.Product;
+import com.task.data.remote.dto.Scooter;
 import com.task.ui.base.listeners.RecyclerItemListener;
 
 import java.util.List;
@@ -15,29 +15,29 @@ import java.util.List;
  * Created by AhmedEltaher on 25/11/16.
  */
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductViewHolder> {
-    private final List<Product> products;
+public class ScootersAdapter extends RecyclerView.Adapter<ProductViewHolder> {
+    private final List<Scooter> scooters;
     private RecyclerItemListener onItemClickListener;
 
-    public ProductsAdapter(RecyclerItemListener onItemClickListener, List<Product> products) {
+    public ScootersAdapter(RecyclerItemListener onItemClickListener, List<Scooter> scooters) {
         this.onItemClickListener = onItemClickListener;
-        this.products = products;
+        this.scooters = scooters;
     }
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scooter_data, parent, false);
         return new ProductViewHolder(view, onItemClickListener);
     }
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        holder.bind(position, products.get(position), onItemClickListener);
+        holder.bind(position, scooters.get(position), onItemClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return scooters.size();
     }
 
 

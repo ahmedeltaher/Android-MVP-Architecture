@@ -1,4 +1,4 @@
-package com.task.ui.component.productDetails;
+package com.task.ui.component.ScooterLocation;
 
 import android.os.Bundle;
 
