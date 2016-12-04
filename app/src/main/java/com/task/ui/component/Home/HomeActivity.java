@@ -9,7 +9,7 @@ import com.task.App;
 import com.task.R;
 import com.task.data.remote.dto.Scooter;
 import com.task.ui.base.BaseActivity;
-import com.task.ui.component.ScooterLocation.ProductDetailsActivity;
+import com.task.ui.component.ScooterLocation.ScooterLocatorActivity;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import butterknife.Bind;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.task.utils.Constants.IMAGE_URL_KEY;
+import static com.task.utils.Constants.SCOOTERS_KEY;
 
 /**
  * Created by AhmedEltaher on 25/11/2016
@@ -51,7 +51,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
     }
 
     @Override
-    public void openSettingsView() {
+    public void openMapView() {
 
     }
 
@@ -75,9 +75,10 @@ public class HomeActivity extends BaseActivity implements HomeView {
     }
 
     @Override
-    public void navigateToProductDetails(String imageURL) {
-        Intent intent = new Intent(this, ProductDetailsActivity.class);
-        intent.putExtra(IMAGE_URL_KEY, imageURL);
+    public void navigateToScooterLocator(List<Scooter> scooters) {
+        Intent intent = new Intent(this, ScooterLocatorActivity.class);
+        // make the list as parcelable .
+//        intent.putExtra(SCOOTERS_KEY, scooters);
         startActivity(intent);
     }
 }

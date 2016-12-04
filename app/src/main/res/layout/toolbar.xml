@@ -2,8 +2,8 @@
 <android.support.design.widget.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:theme="@style/AppTheme.AppBarOverlay"
     app:elevation="0dp">
@@ -24,16 +24,16 @@
             android:text="Fleet Manager"/>
 
         <ImageView
-            android:id="@+id/ic_toolbar_settings"
+            android:id="@+id/ic_toolbar_map"
             style="@style/toolbar_icon"
-            android:src="@android:drawable/ic_menu_recent_history"
-            android:visibility="gone"/>
+            android:src="@android:drawable/ic_dialog_map"/>
 
         <ImageView
             android:id="@+id/ic_toolbar_home"
             style="@style/toolbar_icon"
-            android:src="@android:drawable/ic_menu_set_as"
-            android:visibility="gone"/>
+            android:src="@android:drawable/ic_menu_search"
+            android:visibility="gone"
+            tool:visibility="visible"/>
     </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>

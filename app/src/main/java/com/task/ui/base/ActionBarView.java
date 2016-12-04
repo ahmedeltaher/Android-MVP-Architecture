@@ -6,7 +6,7 @@ package com.task.ui.base;
 
 public interface ActionBarView {
 
-    void openSettingsView();
+    void openMapView();
 
     void openHomeView();
 

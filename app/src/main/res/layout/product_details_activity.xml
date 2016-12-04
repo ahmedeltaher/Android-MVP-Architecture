@@ -3,9 +3,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-    <ImageView
-        android:id="@+id/iv_motorcycle_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
+    <fragment android:id="@+id/map"
+              android:name="com.google.android.gms.maps.SupportMapFragment"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".ui.component.ScooterLocation.ScooterLocatorActivity"/>
 </LinearLayout>

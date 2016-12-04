@@ -14,5 +14,5 @@ public interface HomeView extends Presenter.View {
 
     void setLoaderVisiblity(boolean isVisible);
 
-    void navigateToProductDetails(String ImageURL);
+    void navigateToScooterLocator(List<Scooter> scooters);
 }

@@ -39,7 +39,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
     }
 
     @Override
-    public void openSettingsView() {
+    public void openMapView() {
     }
 
     @Override

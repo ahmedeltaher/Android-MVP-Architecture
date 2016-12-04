@@ -36,8 +36,8 @@ public abstract class Presenter<T extends Presenter.View> {
         isViewAlive.set(false);
     }
 
-    public void onSettingsClick() {
-        ((ActionBarView) view).openSettingsView();
+    public void onMapClick() {
+        ((ActionBarView) view).openMapView();
     }
 
     public void onHomeClick() {
