@@ -18,8 +18,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.task.R.id.map;
-
 public class ScooterLocatorActivity extends BaseActivity implements OnMapReadyCallback, ScooterLocatorView {
 
     @Inject
@@ -27,7 +25,7 @@ public class ScooterLocatorActivity extends BaseActivity implements OnMapReadyCa
 
     SupportMapFragment mapFragment;
 
-    private GoogleMap mMap;
+    private GoogleMap map;
 
     @Override
     protected void initializeDagger() {
@@ -57,7 +55,7 @@ public class ScooterLocatorActivity extends BaseActivity implements OnMapReadyCa
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        map = googleMap;
         // Add a marker in Sydney and move the camera
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         presenter.getScooters();
@@ -75,20 +73,20 @@ public class ScooterLocatorActivity extends BaseActivity implements OnMapReadyCa
             }
             builder.include(scooterLocation);
             markerOptions.icon(BitmapDescriptorFactory.fromResource(icon));
-            mMap.addMarker(markerOptions);
+            map.addMarker(markerOptions);
         }
         LatLngBounds bounds = builder.build();
         int width = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels;
         int padding = (int) (width * 0.10);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
-        mMap.moveCamera(cameraUpdate);
-        mMap.getUiSettings().isCompassEnabled();
+        map.moveCamera(cameraUpdate);
+        map.getUiSettings().isCompassEnabled();
     }
 
     @Override
     public void initializeScootersLocation(List<Scooter> Scooters) {
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 }

@@ -3,6 +3,7 @@ package com.task.ui.component.Home;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -86,8 +87,15 @@ public class HomeActivity extends BaseActivity implements HomeView {
         rvScooters.setVisibility(isVisible ? VISIBLE : GONE);
     }
 
-    @OnClick({R.id.ic_toolbar_map})
-    public void onClick() {
-        presenter.onMapClick();
+    @OnClick({R.id.ic_toolbar_map, R.id.ic_toolbar_refresh})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ic_toolbar_map:
+                presenter.onMapClick();
+                break;
+            case R.id.ic_toolbar_refresh:
+                presenter.getScooters();
+                break;
+        }
     }
 }

@@ -2,7 +2,6 @@
 <android.support.design.widget.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:theme="@style/AppTheme.AppBarOverlay"
@@ -29,11 +28,9 @@
             android:src="@android:drawable/ic_dialog_map"/>
 
         <ImageView
-            android:id="@+id/ic_toolbar_home"
+            android:id="@+id/ic_toolbar_refresh"
             style="@style/toolbar_icon"
-            android:src="@android:drawable/ic_menu_search"
-            android:visibility="gone"
-            tool:visibility="visible"/>
+            android:src="@android:drawable/stat_notify_sync"/>
     </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>

@@ -24,6 +24,7 @@ public class HomePresenter extends Presenter<HomeView> {
 
     private final ScootersUseCase scootersUseCase;
     private ScootersLocationModel scootersLocationModel;
+    private List<Scooter> scooters;
 
     @Inject
     public HomePresenter(ScootersUseCase scootersUseCase) {
@@ -33,22 +34,24 @@ public class HomePresenter extends Presenter<HomeView> {
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
+        getScooters();
+    }
+
+    public void getScooters() {
         getView().setLoaderVisibility(true);
         getView().setNoDataVisibility(false);
         getView().setListVisibility(false);
-        scootersUseCase.getProducts(callback);
+        scootersUseCase.getScooters(callback);
     }
 
     public RecyclerItemListener getRecyclerItemListener() {
         return recyclerItemListener;
     }
 
-    public ScootersLocationModel getScootersLocationModel() {
-        return scootersLocationModel;
-    }
-
     public void onMapClick() {
-        getView().navigateToScooterLocator((ArrayList<Scooter>) scootersLocationModel.getData().getScooters());
+        if (!isNull(scooters) && !scooters.isEmpty()) {
+            getView().navigateToScooterLocator((ArrayList<Scooter>) scooters);
+        }
     }
 
     private void showList(boolean isVisible) {
@@ -66,8 +69,9 @@ public class HomePresenter extends Presenter<HomeView> {
         @Override
         public void onSuccess(ScootersLocationModel scootersLocationModel) {
             HomePresenter.this.scootersLocationModel = scootersLocationModel;
-            List<Scooter> scooters = scootersLocationModel.getData().getScooters();
+            scooters = scootersLocationModel.getData().getScooters();
             if (!isNull(scooters) && !scooters.isEmpty()) {
+                scootersUseCase.sort(scooters);
                 getView().initializeScootersList(scootersLocationModel.getData().getScooters());
                 showList(true);
             } else {

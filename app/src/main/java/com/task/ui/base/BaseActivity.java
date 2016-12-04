@@ -35,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
     ImageView icSettings;
 
     @Nullable
-    @Bind(R.id.ic_toolbar_home)
+    @Bind(R.id.ic_toolbar_refresh)
 
     protected
     ImageView icHome;
@@ -126,7 +126,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
     public void setMapIconVisibility(boolean visible) {
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            ImageView icon = ButterKnife.findById(this, R.id.ic_toolbar_home);
+            ImageView icon = ButterKnife.findById(this, R.id.ic_toolbar_refresh);
             if (icon != null) {
                 icon.setVisibility(visible ? VISIBLE : GONE);
             }

@@ -10,6 +10,6 @@ public class Constants {
     public static int ERROR_UNDEFINED = -1;
     public static String BASE_URL =
         "https://app.staging.joincoup.net";
-//     "https://app.joincoup.com";
+    //     "https://app.joincoup.com";
     public static String SCOOTERS_KEY = "SCOOTERS_KEY";
 }
