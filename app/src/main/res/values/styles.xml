@@ -13,13 +13,18 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="toolbar_icon">
+    <style name="toolbar_right_style">
         <item name="android:layout_gravity">center_vertical|right</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">5dp</item>
     </style>
-
+    <style name="toolbar_left_style">
+        <item name="android:layout_gravity">center_vertical|left</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
     <style name="toolbar_title"/>
 
 </resources>
