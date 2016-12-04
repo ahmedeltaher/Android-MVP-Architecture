@@ -3,6 +3,7 @@ package com.task.ui.component.Home;
 import com.task.data.remote.dto.Scooter;
 import com.task.ui.base.Presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,11 @@ import java.util.List;
 public interface HomeView extends Presenter.View {
     void initializeScootersList(List<Scooter> scooters);
 
-    void setLoaderVisiblity(boolean isVisible);
+    void setLoaderVisibility(boolean isVisible);
 
-    void navigateToScooterLocator(List<Scooter> scooters);
+    void navigateToScooterLocator(ArrayList<Scooter> scooters);
+
+    void setNoDataVisibility(boolean isVisible);
+
+    void setListVisibility(boolean isVisible);
 }

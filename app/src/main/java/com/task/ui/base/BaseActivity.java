@@ -36,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
 
     @Nullable
     @Bind(R.id.ic_toolbar_home)
+
     protected
     ImageView icHome;
 
@@ -122,7 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
     }
 
     @Override
-    public void setHomeIconVisibility(boolean visible) {
+    public void setMapIconVisibility(boolean visible) {
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             ImageView icon = ButterKnife.findById(this, R.id.ic_toolbar_home);
@@ -131,7 +132,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
             }
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

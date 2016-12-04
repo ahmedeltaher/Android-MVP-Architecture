@@ -6,15 +6,11 @@ package com.task.ui.base;
 
 public interface ActionBarView {
 
-    void openMapView();
-
-    void openHomeView();
-
     void setUpIconVisibility(boolean visible);
 
     void setTitle(String titleKey);
 
     void setSettingsIconVisibility(boolean visibility);
 
-    void setHomeIconVisibility(boolean visibility);
+    void setMapIconVisibility(boolean visibility);
 }

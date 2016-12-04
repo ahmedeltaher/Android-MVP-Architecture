@@ -1,12 +1,13 @@
 package com.task.ui.component.ScooterLocation;
 
-import android.os.Bundle;
-
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.task.App;
 import com.task.R;
@@ -17,14 +18,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import static com.task.R.id.map;
 
 public class ScooterLocatorActivity extends BaseActivity implements OnMapReadyCallback, ScooterLocatorView {
 
     @Inject
     ScooterLocatorPresenter presenter;
 
-    @Bind(R.id.map)
     SupportMapFragment mapFragment;
 
     private GoogleMap mMap;
@@ -46,13 +46,6 @@ public class ScooterLocatorActivity extends BaseActivity implements OnMapReadyCa
         return R.layout.activity_maps;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-    }
-
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -65,25 +58,37 @@ public class ScooterLocatorActivity extends BaseActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
-
-    @Override
-    public void openMapView() {
-
-    }
-
-    @Override
-    public void openHomeView() {
-
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        presenter.getScooters();
+        for (int i = 0; i < presenter.getScooters().size(); i++) {
+            Scooter scooter = presenter.getScooters().get(i);
+            LatLng scooterLocation = new LatLng(scooter.getLocation().getLat(), scooter.getLocation().getLng());
+            MarkerOptions markerOptions = new MarkerOptions().position(scooterLocation).title(scooter.getLicensePlate());
+            int icon;
+            if (scooter.getEnergyLevel() > 50) {
+                icon = R.drawable.motorcycle_green_pin;
+            } else if (scooter.getEnergyLevel() > 30) {
+                icon = R.drawable.motorcycle_yellow_pin;
+            } else {
+                icon = R.drawable.motorcycle_red_pin;
+            }
+            builder.include(scooterLocation);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(icon));
+            mMap.addMarker(markerOptions);
+        }
+        LatLngBounds bounds = builder.build();
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        int padding = (int) (width * 0.10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+        mMap.moveCamera(cameraUpdate);
+        mMap.getUiSettings().isCompassEnabled();
     }
 
     @Override
     public void initializeScootersLocation(List<Scooter> Scooters) {
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
     }
 }

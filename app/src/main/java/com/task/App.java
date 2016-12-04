@@ -1,8 +1,8 @@
 package com.task;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.support.multidex.MultiDexApplication;
 
 import com.task.di.DaggerMainComponent;
 import com.task.di.MainComponent;
@@ -11,7 +11,7 @@ import com.task.di.MainComponent;
  * Created by AhmedEltaher on 25/11/2016
  */
 
-public class App extends Application {
+public class App extends MultiDexApplication {
     private MainComponent mainComponent;
     private static Context context;
 

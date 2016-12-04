@@ -38,13 +38,6 @@ public class SplashActivity extends BaseActivity implements SplashView {
         return R.layout.splash_layout;
     }
 
-    @Override
-    public void openMapView() {
-    }
-
-    @Override
-    public void openHomeView() {
-    }
 
     @Override
     public void NavigateToMainScreen() {

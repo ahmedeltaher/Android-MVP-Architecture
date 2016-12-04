@@ -1,9 +1,12 @@
 
 package com.task.data.remote.dto;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class ScootersLocationModel {
+public class ScootersLocationModel implements Parcelable {
 
     @SerializedName("meta")
     private Meta meta;
@@ -26,4 +29,34 @@ public class ScootersLocationModel {
         this.data = data;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.meta, flags);
+        dest.writeParcelable(this.data, flags);
+    }
+
+    public ScootersLocationModel() {
+    }
+
+    protected ScootersLocationModel(Parcel in) {
+        this.meta = in.readParcelable(Meta.class.getClassLoader());
+        this.data = in.readParcelable(Data.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<ScootersLocationModel> CREATOR = new Parcelable.Creator<ScootersLocationModel>() {
+        @Override
+        public ScootersLocationModel createFromParcel(Parcel source) {
+            return new ScootersLocationModel(source);
+        }
+
+        @Override
+        public ScootersLocationModel[] newArray(int size) {
+            return new ScootersLocationModel[size];
+        }
+    };
 }
