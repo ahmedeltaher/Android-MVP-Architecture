@@ -12,11 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/default_margin">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_products_list"
+        <RelativeLayout
+            android:id="@+id/rl_scooter_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_scooters_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/et_search"/>
+        </RelativeLayout>
 
         <ProgressBar
             android:id="@+id/pb_loading"

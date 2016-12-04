@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.task.App;
@@ -32,12 +33,14 @@ import static com.task.utils.Constants.SCOOTERS_KEY;
 public class HomeActivity extends BaseActivity implements HomeView {
     @Inject
     HomePresenter presenter;
-    @Bind(R.id.rv_products_list)
+    @Bind(R.id.rv_scooters_list)
     RecyclerView rvScooters;
     @Bind(R.id.pb_loading)
     ProgressBar pbLoading;
     @Bind(R.id.tv_no_data)
     TextView tvNoData;
+    @Bind(R.id.rl_scooter_list)
+    RelativeLayout rlScooterList;
 
     @Override
     protected void initializeDagger() {
@@ -84,7 +87,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void setListVisibility(boolean isVisible) {
-        rvScooters.setVisibility(isVisible ? VISIBLE : GONE);
+        rlScooterList.setVisibility(isVisible ? VISIBLE : GONE);
     }
 
     @OnClick({R.id.ic_toolbar_map, R.id.ic_toolbar_refresh})
