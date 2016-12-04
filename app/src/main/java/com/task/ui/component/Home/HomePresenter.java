@@ -83,6 +83,7 @@ public class HomePresenter extends Presenter<HomeView> {
         @Override
         public void onFail() {
             showList(false);
+            getView().setLoaderVisibility(false);
         }
     };
 }
