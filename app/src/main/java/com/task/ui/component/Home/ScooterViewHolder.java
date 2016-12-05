@@ -19,7 +19,7 @@ import static com.task.utils.Constants.WARING_ENERGY;
 import static java.lang.String.valueOf;
 
 /**
- * Created by AhmedEltaher on 25/11/16.
+ * Created by AhmedEltaher on 5/12/2016.
  */
 
 public class ScooterViewHolder extends RecyclerView.ViewHolder {

@@ -14,7 +14,6 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {
@@ -36,20 +35,9 @@ repositories {
     repositories {
         mavenCentral()
     }
-    //unitTest -robolectric - needed for robolectric
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    maven {
-        name "Fyber's maven repo"
-        url "https://fyber.bintray.com/maven"
-    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
-
     compile 'org.glassfish:javax.annotation:10.0-b28'
     //android support & recyclerview
     compile 'com.android.support:recyclerview-v7:24.2.1'
@@ -61,18 +49,19 @@ dependencies {
     compile 'org.glassfish:javax.annotation:10.0-b28'
     //Butter knife
     compile 'com.jakewharton:butterknife:7.0.1'
+    //event bus
+    compile 'com.squareup:otto:1.3.8'
     //Logging
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.0'
     // retrofit
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.3.0'
+    //picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
     // google maps
     compile 'com.google.maps:google-maps-services:0.1.16'
     compile 'com.google.android.gms:play-services:10.0.1'
-    //unitTest -robolectric
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.1.1'
     //MultiDex
     compile 'com.android.support:multidex:+'
 }

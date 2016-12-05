@@ -12,7 +12,7 @@ import com.task.ui.base.listeners.RecyclerItemListener;
 import java.util.List;
 
 /**
- * Created by AhmedEltaher on 25/11/16.
+ * Created by AhmedEltaher on 5/12/2016.
  */
 
 public class ScootersAdapter extends RecyclerView.Adapter<ScooterViewHolder> {

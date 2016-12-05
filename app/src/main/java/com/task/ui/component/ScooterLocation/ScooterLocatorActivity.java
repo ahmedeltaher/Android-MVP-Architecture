@@ -13,6 +13,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+/**
+ * Created by AhmedEltaher on 5/12/2016
+ */
+
 public class ScooterLocatorActivity extends BaseActivity implements OnMapReadyCallback, ScooterLocatorView {
 
     @Inject

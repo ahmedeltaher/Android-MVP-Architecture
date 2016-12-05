@@ -17,7 +17,7 @@ import static android.text.TextUtils.isEmpty;
 import static com.task.utils.NetworkUtils.isSuccess;
 
 /**
- * Created by AhmedEltaher on 25/11/2016
+ * Created by AhmedEltaher on 5/12/2016
  */
 
 public class ScootersUseCase {
@@ -45,7 +45,7 @@ public class ScootersUseCase {
     public Scooter findScooterByLicensePlate(String licensePlate, List<Scooter> scooters) {
         if (!isEmpty(licensePlate)) {
             for (Scooter scooter : scooters) {
-                if (licensePlate.equals(scooter.getLicensePlate())) {
+                if (licensePlate.equalsIgnoreCase(scooter.getLicensePlate())) {
                     return scooter;
                 }
             }

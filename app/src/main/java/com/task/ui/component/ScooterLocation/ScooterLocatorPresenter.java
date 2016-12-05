@@ -14,7 +14,7 @@ import static com.task.utils.Constants.SCOOTERS_KEY;
 import static java.lang.String.valueOf;
 
 /**
- * Created by AhmedEltaher on 25/11/2016
+ * Created by AhmedEltaher on 5/12/2016
  */
 
 public class ScooterLocatorPresenter extends Presenter<ScooterLocatorView> {

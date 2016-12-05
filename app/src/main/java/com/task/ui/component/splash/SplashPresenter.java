@@ -7,7 +7,7 @@ import com.task.ui.base.Presenter;
 import javax.inject.Inject;
 
 /**
- * Created by AhmedEltaher on 25/11/2016
+ * Created by AhmedEltaher on 5/12/2016
  */
 
 public class SplashPresenter extends Presenter<SplashView> {
