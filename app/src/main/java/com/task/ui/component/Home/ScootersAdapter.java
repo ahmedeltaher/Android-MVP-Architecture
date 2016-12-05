@@ -15,7 +15,7 @@ import java.util.List;
  * Created by AhmedEltaher on 25/11/16.
  */
 
-public class ScootersAdapter extends RecyclerView.Adapter<ProductViewHolder> {
+public class ScootersAdapter extends RecyclerView.Adapter<ScooterViewHolder> {
     private final List<Scooter> scooters;
     private RecyclerItemListener onItemClickListener;
 
@@ -25,13 +25,13 @@ public class ScootersAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     }
 
     @Override
-    public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ScooterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scooter_data, parent, false);
-        return new ProductViewHolder(view, onItemClickListener);
+        return new ScooterViewHolder(view, onItemClickListener);
     }
 
     @Override
-    public void onBindViewHolder(ProductViewHolder holder, int position) {
+    public void onBindViewHolder(ScooterViewHolder holder, int position) {
         holder.bind(position, scooters.get(position), onItemClickListener);
     }
 

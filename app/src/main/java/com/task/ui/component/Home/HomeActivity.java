@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,6 +43,10 @@ public class HomeActivity extends BaseActivity implements HomeView {
     TextView tvNoData;
     @Bind(R.id.rl_scooter_list)
     RelativeLayout rlScooterList;
+    @Bind(R.id.btn_search)
+    ImageButton btnSearch;
+    @Bind(R.id.et_search)
+    EditText editTextSearch;
 
     @Override
     protected void initializeDagger() {
@@ -90,7 +96,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
         rlScooterList.setVisibility(isVisible ? VISIBLE : GONE);
     }
 
-    @OnClick({R.id.ic_toolbar_map, R.id.ic_toolbar_refresh})
+    @OnClick({R.id.ic_toolbar_map, R.id.ic_toolbar_refresh, R.id.btn_search})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ic_toolbar_map:
@@ -99,6 +105,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
             case R.id.ic_toolbar_refresh:
                 presenter.getScooters();
                 break;
+            case R.id.btn_search:
+                presenter.onSearchClick(editTextSearch.getText().toString());
         }
     }
 }

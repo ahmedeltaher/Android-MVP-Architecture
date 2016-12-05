@@ -5,23 +5,24 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.task.App;
 import com.task.R;
 import com.task.data.remote.dto.Scooter;
 import com.task.ui.base.listeners.RecyclerItemListener;
+import com.task.utils.ResHelper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static android.graphics.Color.GREEN;
-import static android.graphics.Color.RED;
-import static android.graphics.Color.YELLOW;
+import static com.task.utils.Constants.FINE_ENERGY;
+import static com.task.utils.Constants.WARING_ENERGY;
 import static java.lang.String.valueOf;
 
 /**
  * Created by AhmedEltaher on 25/11/16.
  */
 
-public class ProductViewHolder extends RecyclerView.ViewHolder {
+public class ScooterViewHolder extends RecyclerView.ViewHolder {
 
     private RecyclerItemListener onItemClickListener;
 
@@ -37,7 +38,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
     RelativeLayout scooterItemLayout;
 
 
-    public ProductViewHolder(View itemView, RecyclerItemListener onItemClickListener) {
+    public ScooterViewHolder(View itemView, RecyclerItemListener onItemClickListener) {
         super(itemView);
         this.onItemClickListener = onItemClickListener;
         ButterKnife.bind(this, itemView);
@@ -48,12 +49,12 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         tvName.setText(scooter.getModel());
         tvLicensePlate.setText(scooter.getLicensePlate());
         tvEnergyLevel.setText(valueOf(scooter.getEnergyLevel()));
-        if (scooter.getEnergyLevel() > 50) {
-            scooterItemLayout.setBackgroundColor(GREEN);
-        } else if (scooter.getEnergyLevel() > 30) {
-            scooterItemLayout.setBackgroundColor(YELLOW);
+        if (scooter.getEnergyLevel() > FINE_ENERGY) {
+            scooterItemLayout.setBackgroundColor(ResHelper.getColor(App.getContext(), R.color.green));
+        } else if (scooter.getEnergyLevel() > WARING_ENERGY) {
+            scooterItemLayout.setBackgroundColor(ResHelper.getColor(App.getContext(), R.color.yellow));
         } else {
-            scooterItemLayout.setBackgroundColor(RED);
+            scooterItemLayout.setBackgroundResource(ResHelper.getColor(App.getContext(), R.color.red));
         }
         scooterItemLayout.setOnClickListener(v -> recyclerItemListener.onItemSelected(position));
     }

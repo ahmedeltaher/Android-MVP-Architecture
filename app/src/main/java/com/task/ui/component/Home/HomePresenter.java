@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static android.text.TextUtils.isEmpty;
 import static com.task.utils.ObjectUtil.isNull;
 
 /**
@@ -51,6 +52,21 @@ public class HomePresenter extends Presenter<HomeView> {
     public void onMapClick() {
         if (!isNull(scooters) && !scooters.isEmpty()) {
             getView().navigateToScooterLocator((ArrayList<Scooter>) scooters);
+        }
+    }
+
+    public void onSearchClick(String licensePlate) {
+        if (!isEmpty(licensePlate)) {
+            Scooter scooter = scootersUseCase.findScooterByLicensePlate(licensePlate, scooters);
+            if (!isNull(scooter)) {
+                ArrayList<Scooter> scooters = new ArrayList<>();
+                scooters.add(scooter);
+                getView().navigateToScooterLocator(scooters);
+            } else {
+                //show error
+            }
+        } else {
+            //show error
         }
     }
 

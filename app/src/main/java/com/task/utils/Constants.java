@@ -12,4 +12,7 @@ public class Constants {
         "https://app.staging.joincoup.net";
     //     "https://app.joincoup.com";
     public static String SCOOTERS_KEY = "SCOOTERS_KEY";
+    public static double PADDING_FACTOR = 0.10;
+    public static int FINE_ENERGY = 50;
+    public static int WARING_ENERGY = 30;
 }

@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorPrimary"
         android:gravity="center_horizontal"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 

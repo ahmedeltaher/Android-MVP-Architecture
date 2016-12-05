@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static android.text.TextUtils.isEmpty;
 import static com.task.utils.NetworkUtils.isSuccess;
 
 /**
@@ -39,6 +40,17 @@ public class ScootersUseCase {
                 }
             });
         }).start();
+    }
+
+    public Scooter findScooterByLicensePlate(String licensePlate, List<Scooter> scooters) {
+        if (!isEmpty(licensePlate)) {
+            for (Scooter scooter : scooters) {
+                if (licensePlate.equals(scooter.getLicensePlate())) {
+                    return scooter;
+                }
+            }
+        }
+        return null;
     }
 
     public void sort(List<Scooter> scooters) {
