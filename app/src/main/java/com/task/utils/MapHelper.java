@@ -23,6 +23,8 @@ import static com.task.utils.ObjectUtil.isNull;
  */
 
 public class MapHelper {
+    private final float MAX_ZOOM_VALUE = 20.0f;
+
     public GoogleMap BuildMarks(GoogleMap googleMap, List<Scooter> scooters) {
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         if (!isNull(scooters) && !scooters.isEmpty()) {
@@ -48,6 +50,7 @@ public class MapHelper {
         int height = getContext().getResources().getDisplayMetrics().heightPixels;
         int padding = (int) (width * PADDING_FACTOR);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+        googleMap.setMaxZoomPreference(MAX_ZOOM_VALUE);
         googleMap.moveCamera(cameraUpdate);
         googleMap.getUiSettings().isCompassEnabled();
         return googleMap;
