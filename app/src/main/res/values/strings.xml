@@ -3,4 +3,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="no_data">No Data</string>
     <string name="search_by_license_plate">Search by license plate</string>
+    <string name="search_error">there is no such license plate</string>
+    <string name="map_error">there is no motorcycles</string>
 </resources>

@@ -9,8 +9,8 @@ public class Constants {
     public static String UNKNOWN_ERROR = "Server Error";
     public static int ERROR_UNDEFINED = -1;
     public static String BASE_URL =
-        "https://app.staging.joincoup.net";
-    //     "https://app.joincoup.com";
+//        "https://app.staging.joincoup.net";
+         "https://app.joincoup.com";
     public static String SCOOTERS_KEY = "SCOOTERS_KEY";
     public static double PADDING_FACTOR = 0.10;
     public static int FINE_ENERGY = 50;

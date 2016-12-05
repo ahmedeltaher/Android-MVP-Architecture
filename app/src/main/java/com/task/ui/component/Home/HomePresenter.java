@@ -52,6 +52,8 @@ public class HomePresenter extends Presenter<HomeView> {
     public void onMapClick() {
         if (!isNull(scooters) && !scooters.isEmpty()) {
             getView().navigateToScooterLocator((ArrayList<Scooter>) scooters);
+        } else {
+            getView().showMenuMapError();
         }
     }
 
@@ -63,10 +65,10 @@ public class HomePresenter extends Presenter<HomeView> {
                 scooters.add(scooter);
                 getView().navigateToScooterLocator(scooters);
             } else {
-                //show error
+                getView().showSearchError();
             }
         } else {
-            //show error
+            getView().showSearchError();
         }
     }
 

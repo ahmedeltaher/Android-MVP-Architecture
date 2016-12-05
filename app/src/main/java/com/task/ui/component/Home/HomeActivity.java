@@ -1,6 +1,7 @@
 package com.task.ui.component.Home;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -24,6 +25,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.task.utils.Constants.SCOOTERS_KEY;
@@ -94,6 +96,16 @@ public class HomeActivity extends BaseActivity implements HomeView {
     @Override
     public void setListVisibility(boolean isVisible) {
         rlScooterList.setVisibility(isVisible ? VISIBLE : GONE);
+    }
+
+    @Override
+    public void showSearchError() {
+        Snackbar.make(rlScooterList, getString(R.string.search_error), LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showMenuMapError() {
+        Snackbar.make(rlScooterList, getString(R.string.map_error), LENGTH_SHORT).show();
     }
 
     @OnClick({R.id.ic_toolbar_map, R.id.ic_toolbar_refresh, R.id.btn_search})

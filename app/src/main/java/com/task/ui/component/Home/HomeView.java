@@ -20,4 +20,8 @@ public interface HomeView extends Presenter.View {
     void setNoDataVisibility(boolean isVisible);
 
     void setListVisibility(boolean isVisible);
+
+    void showSearchError();
+
+    void showMenuMapError();
 }
