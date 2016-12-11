@@ -1,8 +1,8 @@
 package com.task.di;
 
 
-import com.task.ui.component.Home.HomeActivity;
-import com.task.ui.component.ScooterLocation.ScooterLocatorActivity;
+import com.task.ui.component.details.DetailsActivity;
+import com.task.ui.component.home.HomeActivity;
 import com.task.ui.component.splash.SplashActivity;
 
 import javax.inject.Singleton;
@@ -19,5 +19,5 @@ public interface MainComponent {
 
     void inject(HomeActivity activity);
 
-    void inject(ScooterLocatorActivity activity);
+    void inject(DetailsActivity activity);
 }

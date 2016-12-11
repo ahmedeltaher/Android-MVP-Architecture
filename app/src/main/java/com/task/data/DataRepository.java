@@ -21,7 +21,7 @@ public class DataRepository {
     }
 
     public ResponseWrapper requestScooters() {
-        ResponseWrapper response = apiRepository.getScooters();
+        ResponseWrapper response = apiRepository.getNews();
         return response;
     }
 }

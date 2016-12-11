@@ -1,20 +1,18 @@
-package com.task.ui.component.Home;
+package com.task.ui.component.home;
 
 import android.os.Bundle;
 
-import com.task.data.remote.dto.Scooter;
-import com.task.data.remote.dto.ScootersLocationModel;
+import com.task.data.remote.dto.NewsItem;
+import com.task.data.remote.dto.NewsModel;
 import com.task.ui.base.Presenter;
 import com.task.ui.base.listeners.RecyclerItemListener;
-import com.task.usecase.ScootersUseCase;
-import com.task.usecase.ScootersUseCase.Callback;
+import com.task.usecase.NewsUseCase;
+import com.task.usecase.NewsUseCase.Callback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import static android.text.TextUtils.isEmpty;
 import static com.task.utils.ObjectUtil.isNull;
 
 /**
@@ -23,53 +21,41 @@ import static com.task.utils.ObjectUtil.isNull;
 
 public class HomePresenter extends Presenter<HomeView> {
 
-    private final ScootersUseCase scootersUseCase;
-    private ScootersLocationModel scootersLocationModel;
-    private List<Scooter> scooters;
+    private final NewsUseCase newsUseCase;
+    private NewsModel newsModel;
 
     @Inject
-    public HomePresenter(ScootersUseCase scootersUseCase) {
-        this.scootersUseCase = scootersUseCase;
+    public HomePresenter(NewsUseCase newsUseCase) {
+        this.newsUseCase = newsUseCase;
     }
 
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
-        getScooters();
+        getNews();
     }
 
-    public void getScooters() {
+    public void getNews() {
         getView().setLoaderVisibility(true);
         getView().setNoDataVisibility(false);
         getView().setListVisibility(false);
-        scootersUseCase.getScooters(callback);
+        newsUseCase.getScooters(callback);
     }
 
     public RecyclerItemListener getRecyclerItemListener() {
         return recyclerItemListener;
     }
 
-    public void onMapClick() {
-        if (!isNull(scooters) && !scooters.isEmpty()) {
-            getView().navigateToScooterLocator((ArrayList<Scooter>) scooters);
-        } else {
-            getView().showMenuMapError();
-        }
-    }
-
-    public void onSearchClick(String licensePlate) {
-        if (!isEmpty(licensePlate)) {
-            Scooter scooter = scootersUseCase.findScooterByLicensePlate(licensePlate, scooters);
-            if (!isNull(scooter)) {
-                ArrayList<Scooter> scooters = new ArrayList<>();
-                scooters.add(scooter);
-                getView().navigateToScooterLocator(scooters);
-            } else {
-                getView().showSearchError();
-            }
-        } else {
-            getView().showSearchError();
-        }
+    public void onSearchClick(String newsTitle) {
+//        if (!isEmpty(licensePlate)) {
+//            if (!isNull(scooter)) {
+//
+//            } else {
+//                getView().showSearchError();
+//            }
+//        } else {
+//            getView().showSearchError();
+//        }
     }
 
     private void showList(boolean isVisible) {
@@ -78,19 +64,16 @@ public class HomePresenter extends Presenter<HomeView> {
     }
 
     private final RecyclerItemListener recyclerItemListener = position -> {
-        ArrayList<Scooter> scooters = new ArrayList<>();
-        scooters.add(scootersLocationModel.getData().getScooters().get(position));
-        getView().navigateToScooterLocator(scooters);
+        getView().navigateToDetailsScreen(newsModel.getNewsItems().get(position));
     };
 
     private final Callback callback = new Callback() {
         @Override
-        public void onSuccess(ScootersLocationModel scootersLocationModel) {
-            HomePresenter.this.scootersLocationModel = scootersLocationModel;
-            scooters = scootersLocationModel.getData().getScooters();
-            if (!isNull(scooters) && !scooters.isEmpty()) {
-                scootersUseCase.sort(scooters);
-                getView().initializeScootersList(scootersLocationModel.getData().getScooters());
+        public void onSuccess(NewsModel newsModel) {
+            HomePresenter.this.newsModel = newsModel;
+            List<NewsItem> newsItems = newsModel.getNewsItems();
+            if (!isNull(newsItems) && !newsItems.isEmpty()) {
+                getView().initializeNewsList(newsModel.getNewsItems());
                 showList(true);
             } else {
                 showList(false);

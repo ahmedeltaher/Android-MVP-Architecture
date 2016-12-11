@@ -1,6 +1,5 @@
-package com.task.ui.component.Home;
+package com.task.ui.component.home;
 
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +12,9 @@ import android.widget.TextView;
 
 import com.task.App;
 import com.task.R;
-import com.task.data.remote.dto.Scooter;
+import com.task.data.remote.dto.NewsItem;
 import com.task.ui.base.BaseActivity;
-import com.task.ui.component.ScooterLocation.ScooterLocatorActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,7 +25,6 @@ import butterknife.OnClick;
 import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.task.utils.Constants.SCOOTERS_KEY;
 
 /**
  * Created by AhmedEltaher on 5/12/2016
@@ -68,12 +64,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
     }
 
     @Override
-    public void initializeScootersList(List<Scooter> scooters) {
-        ScootersAdapter scootersAdapter = new ScootersAdapter(presenter.getRecyclerItemListener(), scooters);
+    public void initializeNewsList(List<NewsItem> news) {
+        NewsAdapter newsAdapter = new NewsAdapter(presenter.getRecyclerItemListener(), news);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvScooters.setLayoutManager(layoutManager);
         rvScooters.setHasFixedSize(true);
-        rvScooters.setAdapter(scootersAdapter);
+        rvScooters.setAdapter(newsAdapter);
     }
 
     @Override
@@ -82,10 +78,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
     }
 
     @Override
-    public void navigateToScooterLocator(ArrayList<Scooter> scooters) {
-        Intent intent = new Intent(this, ScooterLocatorActivity.class);
-        intent.putParcelableArrayListExtra(SCOOTERS_KEY, scooters);
-        startActivity(intent);
+    public void navigateToDetailsScreen(NewsItem news) {
+        //TODO Navigate to Details screen
     }
 
     @Override
@@ -112,10 +106,10 @@ public class HomeActivity extends BaseActivity implements HomeView {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ic_toolbar_map:
-                presenter.onMapClick();
+//                presenter.onMapClick();
                 break;
             case R.id.ic_toolbar_refresh:
-                presenter.getScooters();
+                presenter.getNews();
                 break;
             case R.id.btn_search:
                 presenter.onSearchClick(editTextSearch.getText().toString());

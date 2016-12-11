@@ -1,9 +1,8 @@
-package com.task.ui.component.Home;
+package com.task.ui.component.home;
 
-import com.task.data.remote.dto.Scooter;
+import com.task.data.remote.dto.NewsItem;
 import com.task.ui.base.Presenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,11 +10,11 @@ import java.util.List;
  */
 
 public interface HomeView extends Presenter.View {
-    void initializeScootersList(List<Scooter> scooters);
+    void initializeNewsList(List<NewsItem> news);
 
     void setLoaderVisibility(boolean isVisible);
 
-    void navigateToScooterLocator(ArrayList<Scooter> scooters);
+    void navigateToDetailsScreen(NewsItem news);
 
     void setNoDataVisibility(boolean isVisible);
 
