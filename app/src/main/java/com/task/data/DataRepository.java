@@ -20,7 +20,7 @@ public class DataRepository {
         this.localRepository = localRepository;
     }
 
-    public ResponseWrapper requestScooters() {
+    public ResponseWrapper requestNews() {
         ResponseWrapper response = apiRepository.getNews();
         return response;
     }

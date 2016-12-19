@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/default_margin">
         <RelativeLayout
-            android:id="@+id/rl_scooter_list"
+            android:id="@+id/rl_news_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <RelativeLayout
@@ -39,7 +39,7 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:ellipsize="end"
-                        android:hint="@string/search_by_license_plate"
+                        android:hint="@string/search_by_title"
                         android:imeOptions="actionSearch"
                         android:maxLines="1"
                         android:padding="@dimen/search_edit_text_padding"
@@ -55,7 +55,7 @@
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_scooters_list"
+                android:id="@+id/rv_news_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"

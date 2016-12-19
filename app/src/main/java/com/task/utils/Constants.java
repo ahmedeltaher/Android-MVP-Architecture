@@ -9,8 +9,5 @@ public class Constants {
     public static String UNKNOWN_ERROR = "Server Error";
     public static int ERROR_UNDEFINED = -1;
     public static String BASE_URL = "https://api.nytimes.com/svc/";
-    public static String SCOOTERS_KEY = "SCOOTERS_KEY";
-    public static double PADDING_FACTOR = 0.10;
-    public static int FINE_ENERGY = 50;
-    public static int WARING_ENERGY = 30;
+    public static String NEWS_ITEM_KEY = "NEWS_ITEM_KEY";
 }

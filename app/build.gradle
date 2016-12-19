@@ -64,4 +64,8 @@ dependencies {
     compile 'com.google.android.gms:play-services:10.0.1'
     //MultiDex
     compile 'com.android.support:multidex:+'
+    //ParcelablePlease
+    compile 'com.hannesdorfmann.parcelableplease:parent:1.0.2'
+    compile 'com.hannesdorfmann.parcelableplease:annotation:1.0.2'
+    compile 'com.hannesdorfmann.parcelableplease:processor:1.0.2'
 }

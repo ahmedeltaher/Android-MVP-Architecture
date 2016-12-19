@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static android.text.TextUtils.isEmpty;
 import static com.task.utils.ObjectUtil.isNull;
 
 /**
@@ -39,7 +40,7 @@ public class HomePresenter extends Presenter<HomeView> {
         getView().setLoaderVisibility(true);
         getView().setNoDataVisibility(false);
         getView().setListVisibility(false);
-        newsUseCase.getScooters(callback);
+        newsUseCase.getNews(callback);
     }
 
     public RecyclerItemListener getRecyclerItemListener() {
@@ -47,15 +48,17 @@ public class HomePresenter extends Presenter<HomeView> {
     }
 
     public void onSearchClick(String newsTitle) {
-//        if (!isEmpty(licensePlate)) {
-//            if (!isNull(scooter)) {
-//
-//            } else {
-//                getView().showSearchError();
-//            }
-//        } else {
-//            getView().showSearchError();
-//        }
+        List<NewsItem> news = newsModel.getNewsItems();
+        if (!isEmpty(newsTitle) && !isNull(news) && !news.isEmpty()) {
+            NewsItem newsItem = newsUseCase.searchByTitle(news, newsTitle);
+            if (!isNull(newsItem)) {
+                getView().navigateToDetailsScreen(newsItem);
+            } else {
+                getView().showSearchError();
+            }
+        } else {
+            getView().showSearchError();
+        }
     }
 
     private void showList(boolean isVisible) {

@@ -16,7 +16,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MOTO FINDER"
+            android:text="@string/news"
             android:textSize="@dimen/title_font_size"
             android:textStyle="bold|italic"/>
         <ImageView

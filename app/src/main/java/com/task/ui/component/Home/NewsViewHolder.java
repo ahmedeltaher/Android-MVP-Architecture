@@ -14,6 +14,8 @@ import com.task.ui.base.listeners.RecyclerItemListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.text.TextUtils.isEmpty;
+import static com.task.utils.ObjectUtil.isNull;
 import static com.task.utils.ResHelper.getDrawable;
 
 /**
@@ -41,11 +43,19 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(int position, NewsItem newsItem, RecyclerItemListener recyclerItemListener) {
-        tvTitle.setText(newsItem.getAbstract());
-        tvCaption.setText(newsItem.getTitle());
+        //need to move to mapper
+        if (!isEmpty(newsItem.getAbstract())) {
+            tvTitle.setText(newsItem.getTitle());
+        }
+        if (!isEmpty(newsItem.getTitle())) {
+            tvCaption.setText(newsItem.getAbstract());
+        }
+        String URL = null;
+        if (!isNull(newsItem.getMultimedia()) && newsItem.getMultimedia().size() > 3) {
+            URL = newsItem.getMultimedia().get(3).getUrl();
+        }
+        Picasso.with(newsImage.getContext()).load(URL).placeholder(getDrawable(R.drawable.news)).into(newsImage);
         newsItemLayout.setOnClickListener(v -> recyclerItemListener.onItemSelected(position));
-        Picasso.with(newsImage.getContext()).load(newsItem.getMultimedia().get(3).getUrl())
-            .placeholder(getDrawable(R.drawable.news)).into(newsImage);
     }
 }
 

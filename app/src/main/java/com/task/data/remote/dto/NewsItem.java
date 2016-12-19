@@ -1,11 +1,15 @@
 
 package com.task.data.remote.dto;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class NewsItem {
+public class NewsItem implements Parcelable {
 
     @SerializedName("section")
     private String section;
@@ -313,4 +317,68 @@ public class NewsItem {
         this.shortUrl = shortUrl;
     }
 
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.section);
+        dest.writeString(this.subsection);
+        dest.writeString(this.title);
+        dest.writeString(this._abstract);
+        dest.writeString(this.url);
+        dest.writeString(this.byline);
+        dest.writeString(this.itemType);
+        dest.writeString(this.updatedDate);
+        dest.writeString(this.createdDate);
+        dest.writeString(this.publishedDate);
+        dest.writeString(this.materialTypeFacet);
+        dest.writeString(this.kicker);
+        dest.writeStringList(this.desFacet);
+        dest.writeStringList(this.orgFacet);
+        dest.writeStringList(this.perFacet);
+        dest.writeStringList(this.geoFacet);
+        dest.writeList(this.multimedia);
+        dest.writeString(this.shortUrl);
+    }
+
+    public NewsItem() {
+    }
+
+    protected NewsItem(Parcel in) {
+        this.section = in.readString();
+        this.subsection = in.readString();
+        this.title = in.readString();
+        this._abstract = in.readString();
+        this.url = in.readString();
+        this.byline = in.readString();
+        this.itemType = in.readString();
+        this.updatedDate = in.readString();
+        this.createdDate = in.readString();
+        this.publishedDate = in.readString();
+        this.materialTypeFacet = in.readString();
+        this.kicker = in.readString();
+        this.desFacet = in.createStringArrayList();
+        this.orgFacet = in.createStringArrayList();
+        this.perFacet = in.createStringArrayList();
+        this.geoFacet = in.createStringArrayList();
+        this.multimedia = new ArrayList<Multimedium>();
+        in.readList(this.multimedia, Multimedium.class.getClassLoader());
+        this.shortUrl = in.readString();
+    }
+
+    public static final Parcelable.Creator<NewsItem> CREATOR = new Parcelable.Creator<NewsItem>() {
+        @Override
+        public NewsItem createFromParcel(Parcel source) {
+            return new NewsItem(source);
+        }
+
+        @Override
+        public NewsItem[] newArray(int size) {
+            return new NewsItem[size];
+        }
+    };
 }

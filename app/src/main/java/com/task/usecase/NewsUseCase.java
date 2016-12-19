@@ -5,7 +5,10 @@ import android.os.Looper;
 
 import com.task.data.DataRepository;
 import com.task.data.remote.ResponseWrapper;
+import com.task.data.remote.dto.NewsItem;
 import com.task.data.remote.dto.NewsModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,9 +26,9 @@ public class NewsUseCase {
         this.dataRepository = dataRepository;
     }
 
-    public void getScooters(final Callback callback) {
+    public void getNews(final Callback callback) {
         new Thread(() -> {
-            ResponseWrapper responseWrapper = dataRepository.requestScooters();
+            ResponseWrapper responseWrapper = dataRepository.requestNews();
             new Handler(Looper.getMainLooper()).post(() -> {
                 if (isSuccess(responseWrapper.getCode())) {
                     NewsModel newsModel = (NewsModel) responseWrapper.getResponse();
@@ -35,6 +38,15 @@ public class NewsUseCase {
                 }
             });
         }).start();
+    }
+
+    public NewsItem searchByTitle(List<NewsItem> news, String keyWord) {
+        for (NewsItem newsItem : news) {
+            if (newsItem.getTitle().toLowerCase().contains(keyWord.toLowerCase())) {
+                return newsItem;
+            }
+        }
+        return null;
     }
 
     public interface Callback {

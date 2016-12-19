@@ -1,5 +1,6 @@
 package com.task.ui.component.details;
 
+import com.task.data.remote.dto.NewsItem;
 import com.task.ui.base.Presenter;
 
 /**
@@ -7,4 +8,5 @@ import com.task.ui.base.Presenter;
  */
 
 public interface DetailsView extends Presenter.View {
+    void initializeView(NewsItem newsItem);
 }

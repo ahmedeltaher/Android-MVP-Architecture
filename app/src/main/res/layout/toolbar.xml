@@ -21,11 +21,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Fleet Manager"/>
+            android:text="@string/news"/>
 
         <ImageView
             android:id="@+id/ic_toolbar_map"
             style="@style/toolbar_right_style"
+            android:visibility="gone"
             android:src="@android:drawable/ic_dialog_map"/>
 
         <ImageView

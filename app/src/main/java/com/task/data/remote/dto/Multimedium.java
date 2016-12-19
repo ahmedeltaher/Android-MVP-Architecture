@@ -1,9 +1,12 @@
 
 package com.task.data.remote.dto;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Multimedium {
+public class Multimedium implements Parcelable {
 
     @SerializedName("url")
     private String url;
@@ -141,4 +144,46 @@ public class Multimedium {
         this.copyright = copyright;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.url);
+        dest.writeString(this.format);
+        dest.writeValue(this.height);
+        dest.writeValue(this.width);
+        dest.writeString(this.type);
+        dest.writeString(this.subtype);
+        dest.writeString(this.caption);
+        dest.writeString(this.copyright);
+    }
+
+    public Multimedium() {
+    }
+
+    protected Multimedium(Parcel in) {
+        this.url = in.readString();
+        this.format = in.readString();
+        this.height = (Long) in.readValue(Long.class.getClassLoader());
+        this.width = (Long) in.readValue(Long.class.getClassLoader());
+        this.type = in.readString();
+        this.subtype = in.readString();
+        this.caption = in.readString();
+        this.copyright = in.readString();
+    }
+
+    public static final Parcelable.Creator<Multimedium> CREATOR = new Parcelable.Creator<Multimedium>() {
+        @Override
+        public Multimedium createFromParcel(Parcel source) {
+            return new Multimedium(source);
+        }
+
+        @Override
+        public Multimedium[] newArray(int size) {
+            return new Multimedium[size];
+        }
+    };
 }
