@@ -11,7 +11,6 @@
 
 On Android MVP is a way to separate background tasks from activities/views/fragments to make them independent of most lifecycle-related events. This way an application becomes simpler, overall application reliability increases up to 10 times, application code becomes shorter, code maintainability becomes better and developer's life becomes happier.
 
-
 ----------
 
 **MVP vs MVC ?**
@@ -45,4 +44,6 @@ On Android MVP is a way to separate background tasks from activities/views/fragm
 
 **Interaction between Component**
 -----------------------------
+*The objective is the separation of concerns by keeping the business rules not knowing anything at all about the outside world, thus, they can be tested without any dependency to any external element. To achieve this, my proposal is about breaking up the project into 3 different layers, in which each one has its own purpose and works separately from the others. It is worth mentioning that each layer uses its own data model so this independence*
+
 ![enter image description here](https://lh3.googleusercontent.com/-w6E0Cb-3xIc/WFh7BpXCBOI/AAAAAAAAHd8/yycsUCNHoK8YB6rRggyybbUKcNzrKjvfACLcB/s0/Screen+Shot+2016-12-20+at+01.17.19.png "Screen Shot 2016-12-20 at 01.17.19.png")
