@@ -18,7 +18,6 @@ On Android MVP is a way to separate background tasks from activities/views/fragm
 ------------
 ![enter image description here](https://lh3.googleusercontent.com/-z-YMiy8M_c8/WFh1GtNsenI/AAAAAAAAHdk/GkpPq_Y3C6EMz2s0NVS9RHfUOOwQqh0_QCLcB/s0/Screen+Shot+2016-12-20+at+01.01.14.png "Screen Shot 2016-12-20 at 01.01.14.png")
 
-
 **What is MVP Pros and Cons?**
 --------------------------
 ***Pros***
@@ -41,3 +40,9 @@ On Android MVP is a way to separate background tasks from activities/views/fragm
 
 ![enter image description here](https://lh3.googleusercontent.com/-2j5KgH7iCH4/WFhwfTovV4I/AAAAAAAAHdU/RHJs6oeqBjIoANU1wBBXy_QkH3kff85tgCLcB/s0/MVP.png "MVP.png")
 
+
+----------
+
+**Interaction between Component**
+-----------------------------
+![enter image description here](https://lh3.googleusercontent.com/-w6E0Cb-3xIc/WFh7BpXCBOI/AAAAAAAAHd8/yycsUCNHoK8YB6rRggyybbUKcNzrKjvfACLcB/s0/Screen+Shot+2016-12-20+at+01.17.19.png "Screen Shot 2016-12-20 at 01.17.19.png")
