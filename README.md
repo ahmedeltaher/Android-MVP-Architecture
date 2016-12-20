@@ -34,7 +34,7 @@ On Android MVP is a way to separate background tasks from activities/views/fragm
 
 -----------------------------------------------------------
 
-*****How does It work ?*****
+***How does It work ?***
 -----------------------------
 
 ![enter image description here](https://lh3.googleusercontent.com/-2j5KgH7iCH4/WFhwfTovV4I/AAAAAAAAHdU/RHJs6oeqBjIoANU1wBBXy_QkH3kff85tgCLcB/s0/MVP.png "MVP.png")
