@@ -18,6 +18,7 @@ On Android MVP is a way to separate background tasks from activities/views/fragm
 ------------
 ![enter image description here](https://lh3.googleusercontent.com/-z-YMiy8M_c8/WFh1GtNsenI/AAAAAAAAHdk/GkpPq_Y3C6EMz2s0NVS9RHfUOOwQqh0_QCLcB/s0/Screen+Shot+2016-12-20+at+01.01.14.png "Screen Shot 2016-12-20 at 01.01.14.png")
 
+
 **What is MVP Pros and Cons?**
 --------------------------
 ***Pros***
@@ -36,6 +37,7 @@ On Android MVP is a way to separate background tasks from activities/views/fragm
 
 ***How does It work ?***
 -----------------------------
+*simple and clean way , all of your calls have to be in only one direction , that is mean you shouldn't have any reference from your presenter in your useCase , and reference from your useCase in your entities , but can have a reference from useCase to presenter and from your presenter to your Android Main component (Activity , Fragment , Service , BroadCast Receiver ...... ) .*
 
 ![enter image description here](https://lh3.googleusercontent.com/-2j5KgH7iCH4/WFhwfTovV4I/AAAAAAAAHdU/RHJs6oeqBjIoANU1wBBXy_QkH3kff85tgCLcB/s0/MVP.png "MVP.png")
 
