@@ -1,7 +1,6 @@
 package com.task.data.remote;
 
 import com.google.gson.Gson;
-import com.task.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +10,6 @@ import javax.inject.Singleton;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -40,7 +38,6 @@ public class ServiceGenerator {
         okHttpBuilder.addInterceptor(headerInterceptor);
         okHttpBuilder.connectTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS);
         okHttpBuilder.readTimeout(TIMEOUT_READ, TimeUnit.SECONDS);
-//        okHttpBuilder.addInterceptor(getLogger());
         this.gson = gson;
     }
 
@@ -64,13 +61,4 @@ public class ServiceGenerator {
 
         return chain.proceed(request);
     };
-
-    private HttpLoggingInterceptor getLogger() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        if (BuildConfig.DEBUG) {
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS).setLevel
-                (HttpLoggingInterceptor.Level.BODY);
-        }
-        return loggingInterceptor;
-    }
 }
