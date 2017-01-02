@@ -46,7 +46,8 @@ Android MVP is a way to separate Business logic from activities/views/fragments 
 -----------------------------
 *The objective is the separation of concerns by keeping the business rules not knowing anything at all about the outside world, thus, they can be tested without any dependency to any external element. To achieve this, my proposal is about breaking up the project into 3 different layers, in which each one has its own purpose and works separately from the others. It is worth mentioning that each layer uses its own data model so this independence*
 
-![enter image description here](https://lh3.googleusercontent.com/-w6E0Cb-3xIc/WFh7BpXCBOI/AAAAAAAAHd8/yycsUCNHoK8YB6rRggyybbUKcNzrKjvfACLcB/s0/Screen+Shot+2016-12-20+at+01.17.19.png "Screen Shot 2016-12-20 at 01.17.19.png")
+
+![enter image description here](https://lh3.googleusercontent.com/-rv3eVYsVelQ/WGqaeFn5DnI/AAAAAAAAHkQ/RqM-sKm4fVMhLM5oipcfV9x1hxWxRVwjACLcB/s0/MVP.jpg "MVP.jpg")
 
 ----------
 **LICENSE**
