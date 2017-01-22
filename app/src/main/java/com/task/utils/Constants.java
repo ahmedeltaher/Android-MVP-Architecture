@@ -9,4 +9,5 @@ public class Constants {
     public static int ERROR_UNDEFINED = -1;
     public static String BASE_URL = "https://api.nytimes.com/svc/";
     public static String NEWS_ITEM_KEY = "NEWS_ITEM_KEY";
+    public static String LOAD_NEWS_COUNTING_RESOURCE_KEY = "Load_News";
 }

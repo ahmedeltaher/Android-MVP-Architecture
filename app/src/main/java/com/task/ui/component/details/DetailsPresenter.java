@@ -30,7 +30,6 @@ public class DetailsPresenter extends Presenter<DetailsView> {
     }
 
     public String getMainImageURL() {
-
         String url = null;
         if (!isNull(newsItem.getMultimedia()) && !newsItem.getMultimedia().isEmpty()) {
             String mainImageURL = newsItem.getMultimedia().get(newsItem.getMultimedia().size() - 1).getUrl();

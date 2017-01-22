@@ -1,8 +1,10 @@
-package com.task.ui.component.home;
+package com.task.ui.component.news;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.Snackbar;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -29,14 +31,17 @@ import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.task.utils.Constants.NEWS_ITEM_KEY;
+import static com.task.utils.EspressoIdlingResource.decrement;
+import static com.task.utils.EspressoIdlingResource.getIdlingResource;
+import static com.task.utils.EspressoIdlingResource.increment;
 
 /**
  * Created by AhmedEltaher on 5/12/2016
  */
 
-public class HomeActivity extends BaseActivity implements com.task.ui.component.home.HomeView {
+public class HomeActivity extends BaseActivity implements HomeView {
     @Inject
-    com.task.ui.component.home.HomePresenter presenter;
+    com.task.ui.component.news.HomePresenter presenter;
     @Bind(R.id.rv_news_list)
     RecyclerView rvNews;
     @Bind(R.id.pb_loading)
@@ -69,7 +74,7 @@ public class HomeActivity extends BaseActivity implements com.task.ui.component.
 
     @Override
     public void initializeNewsList(List<NewsItem> news) {
-        com.task.ui.component.home.NewsAdapter newsAdapter = new com.task.ui.component.home.NewsAdapter(presenter.getRecyclerItemListener(), news);
+        NewsAdapter newsAdapter = new NewsAdapter(presenter.getRecyclerItemListener(), news);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvNews.setLayoutManager(layoutManager);
         rvNews.setHasFixedSize(true);
@@ -106,8 +111,13 @@ public class HomeActivity extends BaseActivity implements com.task.ui.component.
     }
 
     @Override
-    public void showMenuMapError() {
-        Snackbar.make(rlNewsList, getString(R.string.news_error), LENGTH_SHORT).show();
+    public void incrementCountingIdlingResource() {
+        increment();
+    }
+
+    @Override
+    public void decrementCountingIdlingResource() {
+        decrement();
     }
 
     @OnClick({R.id.ic_toolbar_setting, R.id.ic_toolbar_refresh, R.id.btn_search})
@@ -124,5 +134,10 @@ public class HomeActivity extends BaseActivity implements com.task.ui.component.
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return getIdlingResource();
     }
 }
