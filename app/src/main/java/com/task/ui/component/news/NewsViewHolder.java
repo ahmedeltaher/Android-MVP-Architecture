@@ -1,5 +1,10 @@
 package com.task.ui.component.news;
 
+import static android.text.TextUtils.isEmpty;
+
+import static com.task.utils.ObjectUtil.isNull;
+import static com.task.utils.ResourcesUtil.getDrawableById;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,12 +16,8 @@ import com.task.R;
 import com.task.data.remote.dto.NewsItem;
 import com.task.ui.base.listeners.RecyclerItemListener;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.text.TextUtils.isEmpty;
-import static com.task.utils.ObjectUtil.isNull;
-import static com.task.utils.ResourcesUtil.getDrawableById;
 
 /**
  * Created by AhmedEltaher on 5/12/2016.
@@ -26,13 +27,13 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     private RecyclerItemListener onItemClickListener;
 
-    @Bind(R.id.tv_caption)
+    @BindView(R.id.tv_caption)
     TextView tvCaption;
-    @Bind(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @Bind(R.id.rl_news_item)
+    @BindView(R.id.rl_news_item)
     RelativeLayout newsItemLayout;
-    @Bind(R.id.iv_news_item_image)
+    @BindView(R.id.iv_news_item_image)
     ImageView newsImage;
 
 

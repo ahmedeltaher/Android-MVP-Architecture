@@ -1,5 +1,8 @@
 package com.task.ui.base;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -11,31 +14,31 @@ import android.widget.TextView;
 
 import com.task.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
+import butterknife.Unbinder;
 
 /**
  * Created by AhmedEltaher on 5/12/2016
  */
 
 @SuppressWarnings("ConstantConditions")
-public abstract class BaseActivity extends AppCompatActivity implements Presenter.View, ActionBarView {
+public abstract class BaseActivity extends AppCompatActivity implements Presenter.View,
+        ActionBarView {
 
     protected Presenter presenter;
+    protected Unbinder unbinder;
 
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @Nullable
-    @Bind(R.id.ic_toolbar_setting)
+    @BindView(R.id.ic_toolbar_setting)
     ImageView icSettings;
 
     @Nullable
-    @Bind(R.id.ic_toolbar_refresh)
+    @BindView(R.id.ic_toolbar_refresh)
 
     protected
     ImageView icHome;
@@ -50,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        initializeButterKnife();
+        unbinder = ButterKnife.bind(this);
         initializeDagger();
         initializePresenter();
         initializeToolbar();
@@ -79,10 +82,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
         if (presenter != null) {
             presenter.finalizeView();
         }
-    }
-
-    private void initializeButterKnife() {
-        ButterKnife.bind(this);
     }
 
     protected void initializeToolbar() {
@@ -140,5 +139,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
                 finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 }
