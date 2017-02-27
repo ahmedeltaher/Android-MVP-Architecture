@@ -1,6 +1,7 @@
 package com.task.ui.component.news;
 
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 
 import com.task.data.remote.dto.NewsItem;
 import com.task.data.remote.dto.NewsModel;
@@ -20,7 +21,7 @@ import static com.task.utils.ObjectUtil.isNull;
  * Created by AhmedEltaher on 5/12/2016
  */
 
-public class HomePresenter extends Presenter<com.task.ui.component.news.HomeView> {
+public class HomePresenter extends Presenter<HomeView> {
 
     private final NewsUseCase newsUseCase;
     private NewsModel newsModel;
@@ -71,18 +72,6 @@ public class HomePresenter extends Presenter<com.task.ui.component.news.HomeView
         getView().navigateToDetailsScreen(newsModel.getNewsItems().get(position));
     };
 
-    private final Callback callback = new Callback() {
-        @Override
-        public void onSuccess(NewsModel newsModel) {
-            onGetNewsSuccess(newsModel);
-        }
-
-        @Override
-        public void onFail() {
-            onGetNewsFailed();
-        }
-    };
-
     private void onGetNewsSuccess(NewsModel newsModel) {
         getView().decrementCountingIdlingResource();
         HomePresenter.this.newsModel = newsModel;
@@ -96,9 +85,28 @@ public class HomePresenter extends Presenter<com.task.ui.component.news.HomeView
         getView().setLoaderVisibility(false);
     }
 
+
     private void onGetNewsFailed() {
         getView().decrementCountingIdlingResource();
         showList(false);
         getView().setLoaderVisibility(false);
     }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public NewsModel getNewsModel() {
+        return newsModel;
+    }
+
+    private final Callback callback = new Callback() {
+        @Override
+        public void onSuccess(NewsModel newsModel) {
+            onGetNewsSuccess(newsModel);
+        }
+
+        @Override
+        public void onFail() {
+            onGetNewsFailed();
+        }
+    };
+
 }

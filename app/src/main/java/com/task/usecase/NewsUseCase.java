@@ -14,6 +14,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import static com.task.data.remote.ServiceError.isSuccess;
+import static com.task.threadPool.DefaultExecutorSupplier.getDefaultExecutorSupplier;
 import static com.task.utils.ObjectUtil.isNull;
 
 /**
@@ -29,7 +30,7 @@ public class NewsUseCase {
     }
 
     public void getNews(final Callback callback) {
-        DefaultExecutorSupplier.getDefaultExecutorSupplier().getThreadPool().execute(() -> {
+        getDefaultExecutorSupplier().getThreadPool().execute(() -> {
             ServiceResponse serviceResponse = dataRepository.requestNews();
             new Handler(Looper.getMainLooper()).post(() -> {
                 if (!isNull(serviceResponse) && isSuccess(serviceResponse.getCode())) {

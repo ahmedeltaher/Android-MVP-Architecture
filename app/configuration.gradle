@@ -17,4 +17,5 @@ ext {
     retrofitVersion = '2.2.0'
     okhttpVersion = '3.3.0'
     butterKnifeVersion = '8.5.1'
+    mockitoVersion = '2.7.1'
 }
