@@ -74,23 +74,31 @@ public class HomePresenter extends Presenter<com.task.ui.component.news.HomeView
     private final Callback callback = new Callback() {
         @Override
         public void onSuccess(NewsModel newsModel) {
-            getView().decrementCountingIdlingResource();
-            HomePresenter.this.newsModel = newsModel;
-            List<NewsItem> newsItems = newsModel.getNewsItems();
-            if (!isNull(newsItems) && !newsItems.isEmpty()) {
-                getView().initializeNewsList(newsModel.getNewsItems());
-                showList(true);
-            } else {
-                showList(false);
-            }
-            getView().setLoaderVisibility(false);
+            onGetNewsSuccess(newsModel);
         }
 
         @Override
         public void onFail() {
-            getView().decrementCountingIdlingResource();
-            showList(false);
-            getView().setLoaderVisibility(false);
+            onGetNewsFailed();
         }
     };
+
+    private void onGetNewsSuccess(NewsModel newsModel) {
+        getView().decrementCountingIdlingResource();
+        HomePresenter.this.newsModel = newsModel;
+        List<NewsItem> newsItems = newsModel.getNewsItems();
+        if (!isNull(newsItems) && !newsItems.isEmpty()) {
+            getView().initializeNewsList(newsModel.getNewsItems());
+            showList(true);
+        } else {
+            showList(false);
+        }
+        getView().setLoaderVisibility(false);
+    }
+
+    private void onGetNewsFailed() {
+        getView().decrementCountingIdlingResource();
+        showList(false);
+        getView().setLoaderVisibility(false);
+    }
 }

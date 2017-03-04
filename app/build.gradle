@@ -39,7 +39,6 @@ android {
     defaultConfig {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
 }
 repositories {
     repositories {

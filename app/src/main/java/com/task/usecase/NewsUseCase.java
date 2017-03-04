@@ -7,6 +7,7 @@ import com.task.data.DataRepository;
 import com.task.data.remote.ServiceResponse;
 import com.task.data.remote.dto.NewsItem;
 import com.task.data.remote.dto.NewsModel;
+import com.task.threadPool.DefaultExecutorSupplier;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class NewsUseCase {
     }
 
     public void getNews(final Callback callback) {
-        new Thread(() -> {
+        DefaultExecutorSupplier.getDefaultExecutorSupplier().getThreadPool().execute(() -> {
             ServiceResponse serviceResponse = dataRepository.requestNews();
             new Handler(Looper.getMainLooper()).post(() -> {
                 if (!isNull(serviceResponse) && isSuccess(serviceResponse.getCode())) {
@@ -38,7 +39,7 @@ public class NewsUseCase {
                     callback.onFail();
                 }
             });
-        }).start();
+        });
     }
 
     public NewsItem searchByTitle(List<NewsItem> news, String keyWord) {
