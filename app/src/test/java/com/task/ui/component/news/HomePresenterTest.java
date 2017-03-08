@@ -14,9 +14,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,46 +23,51 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
 public class HomePresenterTest {
 
     @Mock
-    NewsUseCase newsUseCase;
+    private NewsUseCase newsUseCase;
 
     @Mock
-    NewsModel newsModel;
+    private NewsModel newsModelMock;
 
     @Mock
-    HomeView homeView;
+    private HomeView homeView;
 
     @Mock
-    Callback callback;
+    private Callback callback;
 
+    @Mock
+    private List<NewsItem> newsItems;
 
-    HomePresenter homePresenter;
+    @Mock
+    private NewsItem newsItem;
 
-    @Captor
-    private ArgumentCaptor<Callback> callbackArgumentCaptor;
-
+    private HomePresenter homePresenter;
     private String newsTitle = "this is test";
+    private NewsModel newsModel;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        newsModel = generateNewsModel(newsTitle);
+        doAnswer(invocation -> {
+            ((Callback) invocation.getArguments()[0]).onSuccess(newsModel);
+            return null;
+        }).when(newsUseCase).getNews(any(Callback.class));
         homePresenter = new HomePresenter(newsUseCase);
         homePresenter.setView(homeView);
     }
 
     @Test
     public void getNewsList() {
-        NewsModel newsModel = generateNewsModel();
-
         // Let's do a synchronous answer for the callback
         doAnswer(invocation -> {
             ((Callback) invocation.getArguments()[0]).onSuccess(newsModel);
@@ -73,31 +76,42 @@ public class HomePresenterTest {
 
         homePresenter.getNews();
         verify(homeView, times(1)).setLoaderVisibility(true);
-        verify(homeView, times(1)).setNoDataVisibility(false);
-        verify(homeView, times(2)).setListVisibility(false);
+        verify(homeView, times(2)).setNoDataVisibility(false);
+        verify(homeView, times(1)).setListVisibility(false);
         verify(newsUseCase, times(1)).getNews(any(Callback.class));
         assertThat(homePresenter.getNewsModel(), is(equalTo(newsModel)));
     }
 
     @Test
     public void testSearchSuccess() {
+        when(newsUseCase.searchByTitle(newsModel.getNewsItems(), newsTitle)).thenReturn(newsItem);
+        homePresenter.getNews();
+        homePresenter.onSearchClick(newsTitle);
+        verify(homeView, times(1)).navigateToDetailsScreen(any(NewsItem.class));
     }
 
     @Test
-    public void testSearchFailed() {
+    public void testSearchFailedWhileEmptyList() {
+        homePresenter.getNews();
+        homePresenter.onSearchClick(newsTitle);
+        assertThat(newsModelMock.getNewsItems().size(),equalTo(0));
+        verify(homeView, times(1)).showSearchError();
     }
 
     @Test
-    public void onSearchClick() {
+    public void testSearchFailedWhenNothingMatches() {
+        when(newsUseCase.searchByTitle(any(), any())).thenReturn(null);
+        homePresenter.getNews();
+        homePresenter.onSearchClick(newsTitle);
+        verify(homeView, times(1)).showSearchError();
     }
 
     @After
     public void tearDown() throws Exception {
     }
 
-    private NewsModel generateNewsModel() {
+    private NewsModel generateNewsModel(String stup) {
         NewsModel newsModel = new NewsModel();
-        String stup = "some text";
         newsModel.setCopyright(stup);
         newsModel.setLastUpdated(stup);
         newsModel.setSection(stup);
@@ -105,12 +119,17 @@ public class HomePresenterTest {
         newsModel.setNumResults(25L);
         List<NewsItem> newsItems = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
-            NewsItem newsItem = new NewsItem();
-            newsItem.setTitle(stup);
-            newsItem.setAbstract(stup);
-            newsItem.setUrl(stup);
-            newsItems.add(newsItem);
+            newsItems.add(generateNewsItemModel(stup));
         }
+        newsModel.setNewsItems(newsItems);
         return newsModel;
+    }
+
+    private NewsItem generateNewsItemModel(String stup) {
+        NewsItem newsItem = new NewsItem();
+        newsItem.setTitle(stup);
+        newsItem.setAbstract(stup);
+        newsItem.setUrl(stup);
+        return newsItem;
     }
 }

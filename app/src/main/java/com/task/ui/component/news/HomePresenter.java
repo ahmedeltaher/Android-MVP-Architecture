@@ -14,7 +14,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static android.text.TextUtils.isEmpty;
+import static com.task.utils.ObjectUtil.isEmpty;
 import static com.task.utils.ObjectUtil.isNull;
 
 /**
