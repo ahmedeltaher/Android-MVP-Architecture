@@ -22,7 +22,6 @@ import butterknife.Unbinder;
  * Created by AhmedEltaher on 5/12/2016
  */
 
-@SuppressWarnings("ConstantConditions")
 public abstract class BaseActivity extends AppCompatActivity implements Presenter.View,
         ActionBarView {
 

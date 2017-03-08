@@ -1,4 +1,4 @@
-package com.task.ui.component.home;
+package com.task.ui.component.news;
 
 
 import android.support.test.espresso.Espresso;
@@ -12,7 +12,6 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
 import com.task.R;
-import com.task.ui.component.news.HomeActivity;
 import com.task.utils.ResourcesUtil;
 
 import org.junit.After;

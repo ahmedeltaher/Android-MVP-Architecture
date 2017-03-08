@@ -45,10 +45,10 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(int position, NewsItem newsItem, RecyclerItemListener recyclerItemListener) {
         //need to move to mapper
-        if (!isEmpty(newsItem.getAbstract())) {
+        if (!isEmpty(newsItem.getTitle())) {
             tvTitle.setText(newsItem.getTitle());
         }
-        if (!isEmpty(newsItem.getTitle())) {
+        if (!isEmpty(newsItem.getAbstract())) {
             tvCaption.setText(newsItem.getAbstract());
         }
         String URL = null;
