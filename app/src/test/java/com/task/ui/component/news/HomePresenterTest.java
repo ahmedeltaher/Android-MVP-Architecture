@@ -10,13 +10,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -34,30 +31,27 @@ public class HomePresenterTest {
 
     @Mock
     private NewsUseCase newsUseCase;
-
     @Mock
     private NewsModel newsModelMock;
-
     @Mock
     private HomeView homeView;
-
     @Mock
     private Callback callback;
-
     @Mock
     private List<NewsItem> newsItems;
-
     @Mock
     private NewsItem newsItem;
 
     private HomePresenter homePresenter;
     private String newsTitle = "this is test";
     private NewsModel newsModel;
+    private TestModelsGenerator testModelsGenerator;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        newsModel = generateNewsModel(newsTitle);
+        testModelsGenerator = new TestModelsGenerator();
+        newsModel = testModelsGenerator.generateNewsModel(newsTitle);
         doAnswer(invocation -> {
             ((Callback) invocation.getArguments()[0]).onSuccess(newsModel);
             return null;
@@ -94,7 +88,7 @@ public class HomePresenterTest {
     public void testSearchFailedWhileEmptyList() {
         homePresenter.getNews();
         homePresenter.onSearchClick(newsTitle);
-        assertThat(newsModelMock.getNewsItems().size(),equalTo(0));
+        assertThat(newsModelMock.getNewsItems().size(), equalTo(0));
         verify(homeView, times(1)).showSearchError();
     }
 
@@ -108,28 +102,5 @@ public class HomePresenterTest {
 
     @After
     public void tearDown() throws Exception {
-    }
-
-    private NewsModel generateNewsModel(String stup) {
-        NewsModel newsModel = new NewsModel();
-        newsModel.setCopyright(stup);
-        newsModel.setLastUpdated(stup);
-        newsModel.setSection(stup);
-        newsModel.setStatus(stup);
-        newsModel.setNumResults(25L);
-        List<NewsItem> newsItems = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
-            newsItems.add(generateNewsItemModel(stup));
-        }
-        newsModel.setNewsItems(newsItems);
-        return newsModel;
-    }
-
-    private NewsItem generateNewsItemModel(String stup) {
-        NewsItem newsItem = new NewsItem();
-        newsItem.setTitle(stup);
-        newsItem.setAbstract(stup);
-        newsItem.setUrl(stup);
-        return newsItem;
     }
 }

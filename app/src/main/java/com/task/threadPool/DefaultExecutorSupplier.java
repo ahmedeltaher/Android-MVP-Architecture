@@ -37,14 +37,16 @@ public class DefaultExecutorSupplier {
     // A managed pool of background threads
     private ThreadPoolExecutor threadPool;
 
-    MainThreadExecutor mainThreadExecutor;
+//    MainThreadExecutor mainThreadExecutor;
+
     // PriorityThreadPoolExecutor forLightWeightBackgroundTasks
     private DefaultExecutorSupplier() {
-        // setting the thread factory
-        backgroundPriorityThreadFactory = new PriorityThreadFactory(THREAD_PRIORITY_BACKGROUND);
-
-        threadPool = new ThreadPoolExecutor(NUMBER_OF_CORES, NUMBER_OF_CORES,
-                KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, threadWorkLoadQueue, backgroundPriorityThreadFactory);
+        if (threadPool == null) {
+            // setting the thread factory
+            backgroundPriorityThreadFactory = new PriorityThreadFactory(THREAD_PRIORITY_BACKGROUND);
+            threadPool = new ThreadPoolExecutor(NUMBER_OF_CORES, NUMBER_OF_CORES,
+                    KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, threadWorkLoadQueue, backgroundPriorityThreadFactory);
+        }
 
         // setting the thread pool executor for mForLightWeightBackgroundTasks;
         // forLightWeightBackgroundTasks = new PriorityThreadPoolExecutor(NUMBER_OF_CORES,NUMBER_OF_CORES,KEEP_ALIVE_TIME,KEEP_ALIVE_TIME_UNIT,backgroundPriorityThreadFactory);
@@ -54,7 +56,6 @@ public class DefaultExecutorSupplier {
     }
 
     public static DefaultExecutorSupplier getDefaultExecutorSupplier() {
-
         if (instance == null) {
             synchronized (DefaultExecutorSupplier.class) {
                 instance = new DefaultExecutorSupplier();

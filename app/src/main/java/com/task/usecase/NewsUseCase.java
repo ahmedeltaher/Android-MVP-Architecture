@@ -10,6 +10,7 @@ import com.task.data.remote.dto.NewsModel;
 import com.task.threadPool.DefaultExecutorSupplier;
 
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.inject.Inject;
 
@@ -23,16 +24,20 @@ import static com.task.utils.ObjectUtil.isNull;
 
 public class NewsUseCase {
     DataRepository dataRepository;
+    Handler handler;
+    ThreadPoolExecutor threadPoolExecutor;
 
     @Inject
-    public NewsUseCase(DataRepository dataRepository) {
+    public NewsUseCase(DataRepository dataRepository, Handler handler, ThreadPoolExecutor threadPoolExecutor) {
         this.dataRepository = dataRepository;
+        this.handler = handler;
+        this.threadPoolExecutor = threadPoolExecutor;
     }
 
     public void getNews(final Callback callback) {
-        getDefaultExecutorSupplier().getThreadPool().execute(() -> {
+        Runnable runnableTask = () -> {
             ServiceResponse serviceResponse = dataRepository.requestNews();
-            new Handler(Looper.getMainLooper()).post(() -> {
+            handler.post(() -> {
                 if (!isNull(serviceResponse) && isSuccess(serviceResponse.getCode())) {
                     NewsModel newsModel = (NewsModel) serviceResponse.getData();
                     callback.onSuccess(newsModel);
@@ -40,7 +45,8 @@ public class NewsUseCase {
                     callback.onFail();
                 }
             });
-        });
+        };
+        threadPoolExecutor.execute(runnableTask);
     }
 
     public NewsItem searchByTitle(List<NewsItem> news, String keyWord) {
