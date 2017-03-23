@@ -1,13 +1,12 @@
 package com.task.usecase;
 
 import android.os.Handler;
-import android.os.Looper;
 
 import com.task.data.DataRepository;
 import com.task.data.remote.ServiceResponse;
 import com.task.data.remote.dto.NewsItem;
 import com.task.data.remote.dto.NewsModel;
-import com.task.threadPool.DefaultExecutorSupplier;
+import com.task.ui.base.listeners.BaseCallback;
 
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -15,14 +14,13 @@ import java.util.concurrent.ThreadPoolExecutor;
 import javax.inject.Inject;
 
 import static com.task.data.remote.ServiceError.isSuccess;
-import static com.task.threadPool.DefaultExecutorSupplier.getDefaultExecutorSupplier;
 import static com.task.utils.ObjectUtil.isNull;
 
 /**
  * Created by AhmedEltaher on 5/12/2016
  */
 
-public class NewsUseCase {
+public class NewsUseCase implements UseCase {
     DataRepository dataRepository;
     Handler handler;
     ThreadPoolExecutor threadPoolExecutor;
@@ -34,7 +32,8 @@ public class NewsUseCase {
         this.threadPoolExecutor = threadPoolExecutor;
     }
 
-    public void getNews(final Callback callback) {
+    @Override
+    public void getNews(final BaseCallback callback) {
         Runnable runnableTask = () -> {
             ServiceResponse serviceResponse = dataRepository.requestNews();
             handler.post(() -> {
@@ -49,6 +48,7 @@ public class NewsUseCase {
         threadPoolExecutor.execute(runnableTask);
     }
 
+    @Override
     public NewsItem searchByTitle(List<NewsItem> news, String keyWord) {
         for (NewsItem newsItem : news) {
             if (newsItem.getTitle().toLowerCase().contains(keyWord.toLowerCase())) {
@@ -56,11 +56,5 @@ public class NewsUseCase {
             }
         }
         return null;
-    }
-
-    public interface Callback {
-        void onSuccess(NewsModel newsModel);
-
-        void onFail();
     }
 }

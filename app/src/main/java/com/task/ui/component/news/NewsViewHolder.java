@@ -2,6 +2,7 @@ package com.task.ui.component.news;
 
 import static android.text.TextUtils.isEmpty;
 
+import static com.task.utils.Constants.URL_INDEX;
 import static com.task.utils.ObjectUtil.isNull;
 import static com.task.utils.ResourcesUtil.getDrawableById;
 
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.task.R;
 import com.task.data.remote.dto.NewsItem;
 import com.task.ui.base.listeners.RecyclerItemListener;
+import com.task.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +27,6 @@ import butterknife.ButterKnife;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
-    private RecyclerItemListener onItemClickListener;
 
     @BindView(R.id.tv_caption)
     TextView tvCaption;
@@ -37,9 +38,8 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     ImageView newsImage;
 
 
-    public NewsViewHolder(View itemView, RecyclerItemListener onItemClickListener) {
+    public NewsViewHolder(View itemView) {
         super(itemView);
-        this.onItemClickListener = onItemClickListener;
         ButterKnife.bind(this, itemView);
     }
 
@@ -52,8 +52,8 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
             tvCaption.setText(newsItem.getAbstract());
         }
         String URL = null;
-        if (!isNull(newsItem.getMultimedia()) && newsItem.getMultimedia().size() > 3) {
-            URL = newsItem.getMultimedia().get(3).getUrl();
+        if (!isNull(newsItem.getMultimedia()) && newsItem.getMultimedia().size() > URL_INDEX) {
+            URL = newsItem.getMultimedia().get(URL_INDEX).getUrl();
         }
         Picasso.with(newsImage.getContext()).load(URL).placeholder(getDrawableById(R.drawable.news)).into(newsImage);
         newsItemLayout.setOnClickListener(v -> recyclerItemListener.onItemSelected(position));

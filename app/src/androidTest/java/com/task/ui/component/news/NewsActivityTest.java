@@ -33,11 +33,11 @@ import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class HomeActivityTest {
+public class NewsActivityTest {
     private final String testSearchString = "the";
 
     @Rule
-    public ActivityTestRule<HomeActivity> mActivityTestRule = new ActivityTestRule<>(HomeActivity.class);
+    public ActivityTestRule<NewsActivity> mActivityTestRule = new ActivityTestRule<>(NewsActivity.class);
 
     private IdlingResource mIdlingResource;
 

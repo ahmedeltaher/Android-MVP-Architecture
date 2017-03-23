@@ -10,4 +10,5 @@ public class Constants {
     public static String BASE_URL = "https://api.nytimes.com/svc/";
     public static String NEWS_ITEM_KEY = "NEWS_ITEM_KEY";
     public static String LOAD_NEWS_COUNTING_RESOURCE_KEY = "Load_News";
+    public static int URL_INDEX = 3;
 }

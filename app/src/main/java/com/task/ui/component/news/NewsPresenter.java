@@ -5,10 +5,10 @@ import android.support.annotation.VisibleForTesting;
 
 import com.task.data.remote.dto.NewsItem;
 import com.task.data.remote.dto.NewsModel;
-import com.task.ui.base.Presenter;
+import com.task.ui.base.BasePresenter;
+import com.task.ui.base.listeners.BaseCallback;
 import com.task.ui.base.listeners.RecyclerItemListener;
 import com.task.usecase.NewsUseCase;
-import com.task.usecase.NewsUseCase.Callback;
 
 import java.util.List;
 
@@ -21,13 +21,13 @@ import static com.task.utils.ObjectUtil.isNull;
  * Created by AhmedEltaher on 5/12/2016
  */
 
-public class HomePresenter extends Presenter<HomeView> {
+public class NewsPresenter extends BasePresenter<NewsContract.View> implements NewsContract.Presenter {
 
     private final NewsUseCase newsUseCase;
     private NewsModel newsModel;
 
     @Inject
-    public HomePresenter(NewsUseCase newsUseCase) {
+    public NewsPresenter(NewsUseCase newsUseCase) {
         this.newsUseCase = newsUseCase;
     }
 
@@ -37,6 +37,7 @@ public class HomePresenter extends Presenter<HomeView> {
         getNews();
     }
 
+    @Override
     public void getNews() {
         getView().setLoaderVisibility(true);
         getView().setNoDataVisibility(false);
@@ -45,10 +46,12 @@ public class HomePresenter extends Presenter<HomeView> {
         newsUseCase.getNews(callback);
     }
 
+    @Override
     public RecyclerItemListener getRecyclerItemListener() {
         return recyclerItemListener;
     }
 
+    @Override
     public void onSearchClick(String newsTitle) {
         List<NewsItem> news = newsModel.getNewsItems();
         if (!isEmpty(newsTitle) && !isNull(news) && !news.isEmpty()) {
@@ -74,7 +77,7 @@ public class HomePresenter extends Presenter<HomeView> {
 
     private void onGetNewsSuccess(NewsModel newsModel) {
         getView().decrementCountingIdlingResource();
-        HomePresenter.this.newsModel = newsModel;
+        NewsPresenter.this.newsModel = newsModel;
         List<NewsItem> newsItems = newsModel.getNewsItems();
         if (!isNull(newsItems) && !newsItems.isEmpty()) {
             getView().initializeNewsList(newsModel.getNewsItems());
@@ -97,7 +100,7 @@ public class HomePresenter extends Presenter<HomeView> {
         return newsModel;
     }
 
-    private final Callback callback = new Callback() {
+    private final BaseCallback callback = new BaseCallback() {
         @Override
         public void onSuccess(NewsModel newsModel) {
             onGetNewsSuccess(newsModel);

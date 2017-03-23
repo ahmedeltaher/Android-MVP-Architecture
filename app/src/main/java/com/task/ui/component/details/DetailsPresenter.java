@@ -3,7 +3,7 @@ package com.task.ui.component.details;
 import android.os.Bundle;
 
 import com.task.data.remote.dto.NewsItem;
-import com.task.ui.base.Presenter;
+import com.task.ui.base.BasePresenter;
 
 import javax.inject.Inject;
 
@@ -14,7 +14,7 @@ import static com.task.utils.ObjectUtil.isNull;
  * Created by AhmedEltaher on 11/12/16.
  */
 
-public class DetailsPresenter extends Presenter<DetailsView> {
+public class DetailsPresenter extends BasePresenter<DetailsContract.View> implements DetailsContract.Presenter {
 
     NewsItem newsItem;
 
@@ -29,6 +29,7 @@ public class DetailsPresenter extends Presenter<DetailsView> {
         getView().initializeView(newsItem);
     }
 
+    @Override
     public String getMainImageURL() {
         String url = null;
         if (!isNull(newsItem.getMultimedia()) && !newsItem.getMultimedia().isEmpty()) {

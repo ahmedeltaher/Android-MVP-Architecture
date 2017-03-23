@@ -6,7 +6,7 @@ import android.os.Handler;
 import com.task.App;
 import com.task.R;
 import com.task.ui.base.BaseActivity;
-import com.task.ui.component.news.HomeActivity;
+import com.task.ui.component.news.NewsActivity;
 
 import javax.inject.Inject;
 
@@ -16,7 +16,7 @@ import static com.task.utils.Constants.SPLASH_DELAY;
  * Created by AhmedEltaher on 5/12/2016
  */
 
-public class SplashActivity extends BaseActivity implements SplashView {
+public class SplashActivity extends BaseActivity implements SplashContract.View {
 
     @Inject
     SplashPresenter splashPresenter;
@@ -42,7 +42,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @Override
     public void NavigateToMainScreen() {
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+            Intent intent = new Intent(SplashActivity.this, NewsActivity.class);
             startActivity(intent);
             finish();
         }, SPLASH_DELAY);

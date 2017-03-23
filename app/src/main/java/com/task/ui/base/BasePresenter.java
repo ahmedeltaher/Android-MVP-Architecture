@@ -3,6 +3,8 @@ package com.task.ui.base;
 
 import android.os.Bundle;
 
+import com.task.ui.base.listeners.BaseView;
+
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -11,7 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 
-public abstract class Presenter<T extends Presenter.View> {
+public abstract class BasePresenter<T extends BaseView> {
 
     private WeakReference<T> view;
 
@@ -34,8 +36,5 @@ public abstract class Presenter<T extends Presenter.View> {
 
     public void finalizeView() {
         isViewAlive.set(false);
-    }
-
-    public interface View {
     }
 }

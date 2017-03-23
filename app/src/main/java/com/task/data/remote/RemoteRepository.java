@@ -24,14 +24,15 @@ import static com.task.utils.ObjectUtil.isNull;
  * Created by AhmedEltaher on 5/12/2016
  */
 
-public class ApiRepository {
+public class RemoteRepository implements RemoteSource {
     private ServiceGenerator serviceGenerator;
 
     @Inject
-    public ApiRepository(ServiceGenerator serviceGenerator) {
+    public RemoteRepository(ServiceGenerator serviceGenerator) {
         this.serviceGenerator = serviceGenerator;
     }
 
+    @Override
     public ServiceResponse getNews() {
         if (!isConnected(App.getContext())) {
             return null;

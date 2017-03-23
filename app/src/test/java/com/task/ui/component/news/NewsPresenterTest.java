@@ -3,8 +3,8 @@ package com.task.ui.component.news;
 
 import com.task.data.remote.dto.NewsItem;
 import com.task.data.remote.dto.NewsModel;
+import com.task.ui.base.listeners.BaseCallback;
 import com.task.usecase.NewsUseCase;
-import com.task.usecase.NewsUseCase.Callback;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,22 +27,22 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class HomePresenterTest {
+public class NewsPresenterTest {
 
     @Mock
     private NewsUseCase newsUseCase;
     @Mock
     private NewsModel newsModelMock;
     @Mock
-    private HomeView homeView;
+    private NewsContract.View homeView;
     @Mock
-    private Callback callback;
+    private BaseCallback callback;
     @Mock
     private List<NewsItem> newsItems;
     @Mock
     private NewsItem newsItem;
 
-    private HomePresenter homePresenter;
+    private NewsPresenter newsPresenter;
     private String newsTitle = "this is test";
     private NewsModel newsModel;
     private TestModelsGenerator testModelsGenerator;
@@ -53,41 +53,41 @@ public class HomePresenterTest {
         testModelsGenerator = new TestModelsGenerator();
         newsModel = testModelsGenerator.generateNewsModel(newsTitle);
         doAnswer(invocation -> {
-            ((Callback) invocation.getArguments()[0]).onSuccess(newsModel);
+            ((BaseCallback) invocation.getArguments()[0]).onSuccess(newsModel);
             return null;
-        }).when(newsUseCase).getNews(any(Callback.class));
-        homePresenter = new HomePresenter(newsUseCase);
-        homePresenter.setView(homeView);
+        }).when(newsUseCase).getNews(any(BaseCallback.class));
+        newsPresenter = new NewsPresenter(newsUseCase);
+        newsPresenter.setView(homeView);
     }
 
     @Test
     public void getNewsList() {
         // Let's do a synchronous answer for the callback
         doAnswer(invocation -> {
-            ((Callback) invocation.getArguments()[0]).onSuccess(newsModel);
+            ((BaseCallback) invocation.getArguments()[0]).onSuccess(newsModel);
             return null;
-        }).when(newsUseCase).getNews(any(Callback.class));
+        }).when(newsUseCase).getNews(any(BaseCallback.class));
 
-        homePresenter.getNews();
+        newsPresenter.getNews();
         verify(homeView, times(1)).setLoaderVisibility(true);
         verify(homeView, times(2)).setNoDataVisibility(false);
         verify(homeView, times(1)).setListVisibility(false);
-        verify(newsUseCase, times(1)).getNews(any(Callback.class));
-        assertThat(homePresenter.getNewsModel(), is(equalTo(newsModel)));
+        verify(newsUseCase, times(1)).getNews(any(BaseCallback.class));
+        assertThat(newsPresenter.getNewsModel(), is(equalTo(newsModel)));
     }
 
     @Test
     public void testSearchSuccess() {
         when(newsUseCase.searchByTitle(newsModel.getNewsItems(), newsTitle)).thenReturn(newsItem);
-        homePresenter.getNews();
-        homePresenter.onSearchClick(newsTitle);
+        newsPresenter.getNews();
+        newsPresenter.onSearchClick(newsTitle);
         verify(homeView, times(1)).navigateToDetailsScreen(any(NewsItem.class));
     }
 
     @Test
     public void testSearchFailedWhileEmptyList() {
-        homePresenter.getNews();
-        homePresenter.onSearchClick(newsTitle);
+        newsPresenter.getNews();
+        newsPresenter.onSearchClick(newsTitle);
         assertThat(newsModelMock.getNewsItems().size(), equalTo(0));
         verify(homeView, times(1)).showSearchError();
     }
@@ -95,8 +95,8 @@ public class HomePresenterTest {
     @Test
     public void testSearchFailedWhenNothingMatches() {
         when(newsUseCase.searchByTitle(any(), any())).thenReturn(null);
-        homePresenter.getNews();
-        homePresenter.onSearchClick(newsTitle);
+        newsPresenter.getNews();
+        newsPresenter.onSearchClick(newsTitle);
         verify(homeView, times(1)).showSearchError();
     }
 

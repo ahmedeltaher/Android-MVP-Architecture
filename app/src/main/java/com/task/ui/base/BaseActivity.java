@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.task.R;
+import com.task.ui.base.listeners.ActionBarView;
+import com.task.ui.base.listeners.BaseView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,10 +24,10 @@ import butterknife.Unbinder;
  * Created by AhmedEltaher on 5/12/2016
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements Presenter.View,
+public abstract class BaseActivity extends AppCompatActivity implements BaseView,
         ActionBarView {
 
-    protected Presenter presenter;
+    protected BasePresenter presenter;
     protected Unbinder unbinder;
 
     @Nullable
