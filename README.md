@@ -5,7 +5,8 @@
   
 ![androkotlin](https://user-images.githubusercontent.com/1812129/68315997-facddf80-00b8-11ea-81f7-64980da690f1.png)![android-mvp-flow](https://user-images.githubusercontent.com/1812129/68316088-1e912580-00b9-11ea-9a1d-717afa920318.png)  
   
-Model–view–presenter (MVP) is a derivation of the model–view–controller (MVC) architectural pattern which mostly used for building user interfaces. In MVP, the presenter assumes the functionality of the “middle-man”. In MVP, all presentation logic is pushed to the presenter.  
+Model–view–presenter (MVP) is a derivation of the model–view–controller (MVC) architectural pattern which mostly used for building user interfaces. In MVP, the presenter assumes the functionality of the “middle-man”. In MVP, all presentation logic is pushed to the presenter.
+Check here for [MVVM](https://github.com/ahmedeltaher/Android-MVVM-architecture)   
   
 **What is Coroutines ?**  
 -------------------  
